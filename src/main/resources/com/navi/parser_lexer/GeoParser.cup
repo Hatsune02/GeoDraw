@@ -1,0 +1,141 @@
+package com.navi.backend.flexycup;
+import java_cup.runtime.*;
+import com.navi.backend.csv_controller.*;
+import com.navi.ui.*;
+import javax.swing.*;
+import java.util.*;
+
+parser code
+{:
+    public ArrayList<FileTextPane> panes = new ArrayList<>();
+    public SqlParser(SqlLexer lex) {
+        super(lex);
+    }
+    //Metodo al que se llama ante algun error sintactico
+    public void syntax_error(Symbol s){
+        String lexeme = s.value.toString();
+        int line = s.left;
+        int col = s.right;
+        System.out.println("ERROR SINTÁCTICO RECUPERADO");
+        System.out.println("\tLexeme: " + lexeme);
+        System.out.println("\trow: " + line);
+        System.out.println("\tcol: " + col);
+        TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
+        Querys.errors.add(err);
+        try {
+            while(true){
+                if(getScanner().next_token().sym == sym.P_COMA) break;
+            }
+            parse();
+        } catch (Exception e) {
+            //throw new RuntimeException(e);
+        }
+    }
+
+    //Metodo que se llama en el momento en que ya no es posible una recuperacion
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+        String lexeme = s.value.toString();
+        int line = s.left;
+        int col = s.right;
+        System.out.println("ERROR SINTACTICO NO RECUPERABLE");
+        System.out.println("\tLexeme: " + lexeme);
+        System.out.println("\trow: " + line);
+        System.out.println("\tcol: " + col);
+        TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
+        Querys.errors.add(err);
+    }
+    protected int error_sync_size() {
+        return 10;
+    }
+
+:}
+
+terminal COMMA, GRAFICAR, ANIMAR, OBJETO, ANTERIOR, LINE, CURVE, CIRCLE,
+        SQUARE, RECTANGLE, POLYGON, PLUS, MINUS, TIMES, DIVISION,
+        LPAREN, RPAREN, BLUE, RED, YELLOW, GREEN, SKY, CYAN,
+        BLACK, PINK, PURPLE;
+
+terminal String ID;
+
+terminal Double DIGIT;
+
+non terminal instructions, instruction, animate, graph,
+            circle_square_param, rectangle_line_param, polygon_param, animate_param;
+
+non terminal String color;
+
+non terminal Double expr;
+
+
+//Presedencia
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+
+start with instrucciones;
+
+instructions ::= instruction
+            | instructions instruction
+            ;
+
+instruction ::= graph
+            | animate
+            ;
+
+graph ::=     GRAFICAR CIRCLE LPAREN circle_square_param RPAREN
+            | GRAFICAR SQUARE LPAREN circle_square_param RPAREN
+            | GRAFICAR RECTANGLE LPAREN rectangle_line_param RPAREN
+            | GRAFICAR LINE LPAREN rectangle_line_param RPAREN
+            | GRAFICAR POLYGON LPAREN polygon_param RPAREN
+            | error LPAREN circle_square_param RPAREN
+            ;
+
+animate ::= ANIMAR OBJETO ANTERIOR LPAREN animate_param RPAREN
+            ;
+
+circle_square_param ::= ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA color:c
+                    {:
+
+                    :}
+                    ;
+
+rectangle_line_param ::= ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA expr:e4 COMMA color:c
+                    {:
+
+                    :}
+                    ;
+
+polygon_param ::=   ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA expr:e4 COMMA expr:e5 COMMA color:c
+                    {:
+
+                    :}
+                    ;
+
+animate_param ::=     LINE COMMA expr COMMA expr COMMA expr
+                    {:
+
+                    :}
+                    | CURVE COMMA expr COMMA expr COMMA expr
+                    {:
+
+                    :}
+                ;
+
+color ::=    BLUE   {:RESULT = "#2209c3"; :}
+            |RED    {:RESULT = "#ff0000"; :}
+            |YELLOW {:RESULT = "#ffc100"; :}
+            |GREEN  {:RESULT = "#008000"; :}
+            |SKY    {:RESULT = "#86cecb"; :}
+            |CYAN   {:RESULT = "#0bdbb6"; :}
+            |BLACK  {:RESULT = "#000000"; :}
+            |PINK   {:RESULT = "#ffaadd"; :}
+            |PURPLE {:RESULT = "#4c00b0"; :}
+            ;
+
+expr ::=  expr:e1 PLUS expr:e2      {: RESULT = e1 + e2; :}
+        | expr:e1 MINUS expr:e2     {: RESULT = e1 - e2; :}
+        | expr:e1 TIMES expr:e2     {: RESULT = e1 * e2; :}
+        | expr:e1 DIVISION expr:e2  {: RESULT = e1 / e2; :}
+        | LPAREN expr:e RPAREN      {: RESULT = e; :}
+        | DIGIT:d                   {: RESULT = d; :}
+        ;
+
