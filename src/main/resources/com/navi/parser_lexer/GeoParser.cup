@@ -1,14 +1,11 @@
-package com.navi.backend.flexycup;
+package com.navi.backend.parser_lexer;
 import java_cup.runtime.*;
-import com.navi.backend.csv_controller.*;
-import com.navi.ui.*;
-import javax.swing.*;
 import java.util.*;
+import com.navi.backend.parameters.*;
 
 parser code
 {:
-    public ArrayList<FileTextPane> panes = new ArrayList<>();
-    public SqlParser(SqlLexer lex) {
+    public GeoParser(GeoLexer lex) {
         super(lex);
     }
     //Metodo al que se llama ante algun error sintactico
@@ -20,16 +17,17 @@ parser code
         System.out.println("\tLexeme: " + lexeme);
         System.out.println("\trow: " + line);
         System.out.println("\tcol: " + col);
+        /*
         TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
         Querys.errors.add(err);
         try {
-            while(true){
+           while(true){
                 if(getScanner().next_token().sym == sym.P_COMA) break;
             }
             parse();
         } catch (Exception e) {
             //throw new RuntimeException(e);
-        }
+        }*/
     }
 
     //Metodo que se llama en el momento en que ya no es posible una recuperacion
@@ -41,13 +39,9 @@ parser code
         System.out.println("\tLexeme: " + lexeme);
         System.out.println("\trow: " + line);
         System.out.println("\tcol: " + col);
-        TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
-        Querys.errors.add(err);
+        //TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
+        //Querys.errors.add(err);
     }
-    protected int error_sync_size() {
-        return 10;
-    }
-
 :}
 
 terminal COMMA, GRAFICAR, ANIMAR, OBJETO, ANTERIOR, LINE, CURVE, CIRCLE,
@@ -59,8 +53,14 @@ terminal String ID;
 
 terminal Double DIGIT;
 
-non terminal instructions, instruction, animate, graph,
-            circle_square_param, rectangle_line_param, polygon_param, animate_param;
+non terminal ArrayList<Parameter> instructions, instruction;
+
+non terminal Parameter graph, animate,  circle_square_param, animate_param;
+
+non terminal RectangleLineParameter rectangle_line_param;
+
+non terminal PolygonParameter polygon_param;
+
 
 non terminal String color;
 
@@ -69,54 +69,98 @@ non terminal Double expr;
 
 //Presedencia
 precedence left PLUS, MINUS;
-precedence left TIMES, DIVIDE;
+precedence left TIMES, DIVISION;
 
-start with instrucciones;
+start with instructions;
 
-instructions ::= instruction
-            | instructions instruction
+instructions ::= instruction:i
+            {:
+            RESULT = i;
+            :}
+            | instructions:list instruction:i
+            {:
+            list.addAll(i);
+            RESULT = list;
+            :}
             ;
 
-instruction ::= graph
-            | animate
+instruction ::= graph:g
+            {:
+            ArrayList<Parameter> list = new ArrayList<>();
+            list.add(g);
+            RESULT = list;
+            :}
+            | graph:g animate:a
+            {:
+            ArrayList<Parameter> list = new ArrayList<>();
+            list.add(g);
+            list.add(a);
+            RESULT = list;
+            :}
             ;
 
-graph ::=     GRAFICAR CIRCLE LPAREN circle_square_param RPAREN
-            | GRAFICAR SQUARE LPAREN circle_square_param RPAREN
-            | GRAFICAR RECTANGLE LPAREN rectangle_line_param RPAREN
-            | GRAFICAR LINE LPAREN rectangle_line_param RPAREN
-            | GRAFICAR POLYGON LPAREN polygon_param RPAREN
-            | error LPAREN circle_square_param RPAREN
+graph ::=     GRAFICAR CIRCLE LPAREN circle_square_param:p RPAREN
+            {:
+            p.setType(Parameter.CIRCLE);
+            RESULT = p;
+            :}
+            | GRAFICAR SQUARE LPAREN circle_square_param:p RPAREN
+            {:
+            p.setType(Parameter.SQUARE);
+            RESULT = p;
+            :}
+            | GRAFICAR RECTANGLE LPAREN rectangle_line_param:p RPAREN
+            {:
+            p.setType(Parameter.RECTANGLE);
+            RESULT = p;
+            :}
+            | GRAFICAR LINE LPAREN rectangle_line_param:p RPAREN
+            {:
+            p.setType(Parameter.LINE);
+            RESULT = p;
+            :}
+            | GRAFICAR POLYGON LPAREN polygon_param:p RPAREN
+            {:
+            p.setType(Parameter.POLYGON);
+            RESULT = p;
+            :}
+            | error LPAREN circle_square_param:p RPAREN
+            {:
+
+            :}
             ;
 
-animate ::= ANIMAR OBJETO ANTERIOR LPAREN animate_param RPAREN
+animate ::= ANIMAR OBJETO ANTERIOR LPAREN animate_param:p RPAREN
+            {:
+            RESULT = p;
+            :}
             ;
 
 circle_square_param ::= ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA color:c
                     {:
-
+                    RESULT = new Parameter(Parameter.SQUARE, id, e1, e2, e3, c);
                     :}
                     ;
 
 rectangle_line_param ::= ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA expr:e4 COMMA color:c
                     {:
-
+                    RESULT = new RectangleLineParameter(Parameter.RECTANGLE, id, e1, e2, e3, e4, c);
                     :}
                     ;
 
 polygon_param ::=   ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA expr:e4 COMMA expr:e5 COMMA color:c
                     {:
-
+                    RESULT = new PolygonParameter(Parameter.POLYGON, id, e1, e2, e3, e4, e5, c);
                     :}
                     ;
 
-animate_param ::=     LINE COMMA expr COMMA expr COMMA expr
+animate_param ::=     LINE COMMA expr:e1 COMMA expr:e2 COMMA expr:e3
                     {:
-
+                    RESULT = new Parameter(Parameter.ANIMATE, "curve", e1, e2, e3, "");
                     :}
-                    | CURVE COMMA expr COMMA expr COMMA expr
+                    | CURVE COMMA expr:e1 COMMA expr:e2 COMMA expr:e3
                     {:
-
+                    RESULT = new Parameter(Parameter.ANIMATE, "curve", e1, e2, e3, "");
                     :}
                 ;
 

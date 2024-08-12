@@ -1,12 +1,12 @@
-package com.navi.backend.flexycup;
+package com.navi.backend.parser_lexer;
 import java_cup.runtime.*;
-import static com.navi.backend.flexycup.sym.*;
-import com.navi.backend.csv_controller.*;
+import static com.navi.backend.parser_lexer.sym.*;
+import com.navi.backend.parameters.*;
 import java.util.ArrayList;
 %% //separador de area
 
 %public
-%class SqlLexer
+%class GeoLexer
 %cup
 %line
 %column
@@ -54,13 +54,13 @@ rectangle = (rectangulo)
 polygon = (poligono)
 
 /* Others */
-Identifier = [a-zA-Z0-9-_]+
+Identifier = [-_a-zA-Z0-9]+
 Digit = [0-9]+
 Decimal = {Digit}\.{Digit}
 Comma = [,]
 
 %{
-    public static ArrayList<TError> errors = new ArrayList<>();
+    //public static ArrayList<TError> errors = new ArrayList<>();
 
     private Symbol symbol(int type){
         return new Symbol(type, yyline+1,yycolumn+1);
@@ -70,8 +70,8 @@ Comma = [,]
     }
     private void error(){
         System.out.println("Error en linea: "+(yyline+1)+", columna: "+(yycolumn+1));
-        TError err = new TError(yytext(), "Error Léxico", "Símbolo inválido", yyline+1, yycolumn+1);
-        errors.add(err);
+        //TError err = new TError(yytext(), "Error Léxico", "Símbolo inválido", yyline+1, yycolumn+1);
+        //errors.add(err);
     }
 %}
 
@@ -134,15 +134,25 @@ Comma = [,]
 
 
 {Digit}
-{return symbol(DIGIT, new Double(yytext()));}
+{
+    double num = 0;
+    try{
+        num = Double.parseDouble(yytext());
+    } catch (NumberFormatException e){}
+    return symbol(DIGIT, num);}
 {Decimal}
-{return symbol(DIGIT, new Double(yytext()));}
+{
+     double num = 0;
+    try{
+        num = Double.parseDouble(yytext());
+    } catch (NumberFormatException e){}
+    return symbol(DIGIT, num);}
 {Identifier}
 {return symbol(ID, yytext());}
 {WhiteSpace} { /* ignore */ }
 
 [\^´°¬|!$%&=?'¡¿\w]+
-{Errors.getErrors().addLS(yyline+1, yycolumn+1, "Cadena no definida", yytext(), Errors.LEXICAL);}
+{/*Errors.getErrors().addLS(yyline+1, yycolumn+1, "Cadena no definida", yytext(), Errors.LEXICAL);*/}
 [^]                 {error(); }
 
 
