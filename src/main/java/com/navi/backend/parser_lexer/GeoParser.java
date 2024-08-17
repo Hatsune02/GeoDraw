@@ -8,6 +8,7 @@ package com.navi.backend.parser_lexer;
 import java_cup.runtime.*;
 import java.util.*;
 import com.navi.backend.parameters.*;
+import java.text.DecimalFormat;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -33,17 +34,17 @@ public class GeoParser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\040\000\002\002\004\000\002\002\003\000\002\002" +
-    "\004\000\002\003\003\000\002\003\004\000\002\004\007" +
-    "\000\002\004\007\000\002\004\007\000\002\004\007\000" +
-    "\002\004\007\000\002\004\006\000\002\005\010\000\002" +
-    "\006\013\000\002\010\015\000\002\011\017\000\002\007" +
-    "\011\000\002\007\011\000\002\012\003\000\002\012\003" +
-    "\000\002\012\003\000\002\012\003\000\002\012\003\000" +
-    "\002\012\003\000\002\012\003\000\002\012\003\000\002" +
-    "\012\003\000\002\013\005\000\002\013\005\000\002\013" +
-    "\005\000\002\013\005\000\002\013\005\000\002\013\003" +
-    "" });
+    "\000\041\000\002\002\004\000\002\002\003\000\002\003" +
+    "\003\000\002\003\004\000\002\004\003\000\002\004\004" +
+    "\000\002\005\007\000\002\005\007\000\002\005\007\000" +
+    "\002\005\007\000\002\005\007\000\002\005\006\000\002" +
+    "\006\010\000\002\007\013\000\002\011\015\000\002\012" +
+    "\017\000\002\010\011\000\002\010\011\000\002\013\003" +
+    "\000\002\013\003\000\002\013\003\000\002\013\003\000" +
+    "\002\013\003\000\002\013\003\000\002\013\003\000\002" +
+    "\013\003\000\002\013\003\000\002\014\005\000\002\014" +
+    "\005\000\002\014\005\000\002\014\005\000\002\014\005" +
+    "\000\002\014\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -51,85 +52,85 @@ public class GeoParser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\152\000\006\003\007\005\006\001\002\000\010\002" +
-    "\000\003\000\005\000\001\002\000\010\002\154\003\007" +
-    "\005\006\001\002\000\014\011\102\013\101\014\103\015" +
-    "\077\016\100\001\002\000\004\023\052\001\002\000\012" +
-    "\002\ufffe\003\ufffe\005\ufffe\006\011\001\002\000\004\007" +
-    "\013\001\002\000\010\002\ufffd\003\ufffd\005\ufffd\001\002" +
-    "\000\004\010\014\001\002\000\004\023\015\001\002\000" +
-    "\006\011\016\012\020\001\002\000\004\004\044\001\002" +
-    "\000\004\024\043\001\002\000\004\004\021\001\002\000" +
-    "\006\023\023\037\024\001\002\000\014\004\037\017\027" +
+    "\000\153\000\006\003\007\005\006\001\002\000\010\002" +
+    "\000\003\007\005\006\001\002\000\010\002\uffff\003\uffff" +
+    "\005\uffff\001\002\000\014\011\104\013\103\014\105\015" +
+    "\101\016\102\001\002\000\004\023\054\001\002\000\004" +
+    "\002\053\001\002\000\012\002\ufffd\003\ufffd\005\ufffd\006" +
+    "\012\001\002\000\004\007\014\001\002\000\010\002\ufffc" +
+    "\003\ufffc\005\ufffc\001\002\000\004\010\015\001\002\000" +
+    "\004\023\016\001\002\000\006\011\017\012\021\001\002" +
+    "\000\004\004\045\001\002\000\004\024\044\001\002\000" +
+    "\004\004\022\001\002\000\006\023\023\037\025\001\002" +
+    "\000\006\023\023\037\025\001\002\000\014\004\026\017" +
+    "\027\020\031\021\032\022\030\001\002\000\016\004\uffe1" +
+    "\017\uffe1\020\uffe1\021\uffe1\022\uffe1\024\uffe1\001\002\000" +
+    "\006\023\023\037\025\001\002\000\006\023\023\037\025" +
+    "\001\002\000\006\023\023\037\025\001\002\000\006\023" +
+    "\023\037\025\001\002\000\006\023\023\037\025\001\002" +
+    "\000\016\004\uffe4\017\uffe4\020\uffe4\021\uffe4\022\uffe4\024" +
+    "\uffe4\001\002\000\016\004\uffe5\017\uffe5\020\uffe5\021\032" +
+    "\022\030\024\uffe5\001\002\000\016\004\uffe3\017\uffe3\020" +
+    "\uffe3\021\uffe3\022\uffe3\024\uffe3\001\002\000\016\004\uffe6" +
+    "\017\uffe6\020\uffe6\021\032\022\030\024\uffe6\001\002\000" +
+    "\014\004\040\017\027\020\031\021\032\022\030\001\002" +
+    "\000\006\023\023\037\025\001\002\000\014\017\027\020" +
+    "\031\021\032\022\030\024\ufff0\001\002\000\014\017\027" +
+    "\020\031\021\032\022\030\024\043\001\002\000\016\004" +
+    "\uffe2\017\uffe2\020\uffe2\021\uffe2\022\uffe2\024\uffe2\001\002" +
+    "\000\010\002\ufff5\003\ufff5\005\ufff5\001\002\000\006\023" +
+    "\023\037\025\001\002\000\014\004\047\017\027\020\031" +
+    "\021\032\022\030\001\002\000\006\023\023\037\025\001" +
+    "\002\000\014\004\051\017\027\020\031\021\032\022\030" +
+    "\001\002\000\006\023\023\037\025\001\002\000\014\017" +
+    "\027\020\031\021\032\022\030\024\ufff1\001\002\000\004" +
+    "\002\001\001\002\000\004\036\055\001\002\000\004\004" +
+    "\060\001\002\000\004\024\057\001\002\000\012\002\ufff6" +
+    "\003\ufff6\005\ufff6\006\ufff6\001\002\000\006\023\023\037" +
+    "\025\001\002\000\014\004\062\017\027\020\031\021\032" +
+    "\022\030\001\002\000\006\023\023\037\025\001\002\000" +
+    "\014\004\064\017\027\020\031\021\032\022\030\001\002" +
+    "\000\006\023\023\037\025\001\002\000\014\004\066\017" +
+    "\027\020\031\021\032\022\030\001\002\000\024\025\073" +
+    "\026\077\027\075\030\067\031\070\032\076\033\100\034" +
+    "\072\035\074\001\002\000\004\024\uffec\001\002\000\004" +
+    "\024\uffeb\001\002\000\004\024\ufff4\001\002\000\004\024" +
+    "\uffe8\001\002\000\004\024\uffef\001\002\000\004\024\uffe7" +
+    "\001\002\000\004\024\uffed\001\002\000\004\024\uffea\001" +
+    "\002\000\004\024\uffee\001\002\000\004\024\uffe9\001\002" +
+    "\000\004\023\152\001\002\000\004\023\132\001\002\000" +
+    "\004\023\127\001\002\000\004\023\111\001\002\000\004" +
+    "\023\106\001\002\000\004\036\055\001\002\000\004\024" +
+    "\110\001\002\000\012\002\ufffa\003\ufffa\005\ufffa\006\ufffa" +
+    "\001\002\000\004\036\112\001\002\000\004\004\115\001" +
+    "\002\000\004\024\114\001\002\000\012\002\ufff8\003\ufff8" +
+    "\005\ufff8\006\ufff8\001\002\000\006\023\023\037\025\001" +
+    "\002\000\014\004\117\017\027\020\031\021\032\022\030" +
+    "\001\002\000\006\023\023\037\025\001\002\000\014\004" +
+    "\121\017\027\020\031\021\032\022\030\001\002\000\006" +
+    "\023\023\037\025\001\002\000\014\004\123\017\027\020" +
+    "\031\021\032\022\030\001\002\000\006\023\023\037\025" +
+    "\001\002\000\014\004\125\017\027\020\031\021\032\022" +
+    "\030\001\002\000\024\025\073\026\077\027\075\030\067" +
+    "\031\070\032\076\033\100\034\072\035\074\001\002\000" +
+    "\004\024\ufff3\001\002\000\004\036\055\001\002\000\004" +
+    "\024\131\001\002\000\012\002\ufffb\003\ufffb\005\ufffb\006" +
+    "\ufffb\001\002\000\004\036\133\001\002\000\004\004\136" +
+    "\001\002\000\004\024\135\001\002\000\012\002\ufff7\003" +
+    "\ufff7\005\ufff7\006\ufff7\001\002\000\006\023\023\037\025" +
+    "\001\002\000\014\004\140\017\027\020\031\021\032\022" +
+    "\030\001\002\000\006\023\023\037\025\001\002\000\014" +
+    "\004\142\017\027\020\031\021\032\022\030\001\002\000" +
+    "\006\023\023\037\025\001\002\000\014\004\144\017\027" +
     "\020\031\021\032\022\030\001\002\000\006\023\023\037" +
-    "\024\001\002\000\016\004\uffe2\017\uffe2\020\uffe2\021\uffe2" +
-    "\022\uffe2\024\uffe2\001\002\000\014\017\027\020\031\021" +
-    "\032\022\030\024\026\001\002\000\016\004\uffe3\017\uffe3" +
-    "\020\uffe3\021\uffe3\022\uffe3\024\uffe3\001\002\000\006\023" +
-    "\023\037\024\001\002\000\006\023\023\037\024\001\002" +
-    "\000\006\023\023\037\024\001\002\000\006\023\023\037" +
-    "\024\001\002\000\016\004\uffe5\017\uffe5\020\uffe5\021\uffe5" +
-    "\022\uffe5\024\uffe5\001\002\000\016\004\uffe6\017\uffe6\020" +
-    "\uffe6\021\032\022\030\024\uffe6\001\002\000\016\004\uffe4" +
-    "\017\uffe4\020\uffe4\021\uffe4\022\uffe4\024\uffe4\001\002\000" +
-    "\016\004\uffe7\017\uffe7\020\uffe7\021\032\022\030\024\uffe7" +
-    "\001\002\000\006\023\023\037\024\001\002\000\014\004" +
-    "\041\017\027\020\031\021\032\022\030\001\002\000\006" +
-    "\023\023\037\024\001\002\000\014\017\027\020\031\021" +
-    "\032\022\030\024\ufff1\001\002\000\010\002\ufff6\003\ufff6" +
-    "\005\ufff6\001\002\000\006\023\023\037\024\001\002\000" +
-    "\014\004\046\017\027\020\031\021\032\022\030\001\002" +
-    "\000\006\023\023\037\024\001\002\000\014\004\050\017" +
-    "\027\020\031\021\032\022\030\001\002\000\006\023\023" +
-    "\037\024\001\002\000\014\017\027\020\031\021\032\022" +
-    "\030\024\ufff2\001\002\000\004\036\053\001\002\000\004" +
-    "\004\056\001\002\000\004\024\055\001\002\000\012\002" +
-    "\ufff7\003\ufff7\005\ufff7\006\ufff7\001\002\000\006\023\023" +
-    "\037\024\001\002\000\014\004\060\017\027\020\031\021" +
-    "\032\022\030\001\002\000\006\023\023\037\024\001\002" +
-    "\000\014\004\062\017\027\020\031\021\032\022\030\001" +
-    "\002\000\006\023\023\037\024\001\002\000\014\004\064" +
-    "\017\027\020\031\021\032\022\030\001\002\000\024\025" +
-    "\071\026\074\027\072\030\065\031\066\032\075\033\076" +
-    "\034\070\035\073\001\002\000\004\024\uffed\001\002\000" +
-    "\004\024\uffec\001\002\000\004\024\ufff5\001\002\000\004" +
-    "\024\uffe9\001\002\000\004\024\ufff0\001\002\000\004\024" +
-    "\uffee\001\002\000\004\024\uffe8\001\002\000\004\024\uffef" +
-    "\001\002\000\004\024\uffeb\001\002\000\004\024\uffea\001" +
-    "\002\000\004\023\150\001\002\000\004\023\130\001\002" +
-    "\000\004\023\125\001\002\000\004\023\107\001\002\000" +
-    "\004\023\104\001\002\000\004\036\053\001\002\000\004" +
-    "\024\106\001\002\000\012\002\ufffb\003\ufffb\005\ufffb\006" +
-    "\ufffb\001\002\000\004\036\110\001\002\000\004\004\113" +
-    "\001\002\000\004\024\112\001\002\000\012\002\ufff9\003" +
-    "\ufff9\005\ufff9\006\ufff9\001\002\000\006\023\023\037\024" +
-    "\001\002\000\014\004\115\017\027\020\031\021\032\022" +
-    "\030\001\002\000\006\023\023\037\024\001\002\000\014" +
-    "\004\117\017\027\020\031\021\032\022\030\001\002\000" +
-    "\006\023\023\037\024\001\002\000\014\004\121\017\027" +
-    "\020\031\021\032\022\030\001\002\000\006\023\023\037" +
-    "\024\001\002\000\014\004\123\017\027\020\031\021\032" +
-    "\022\030\001\002\000\024\025\071\026\074\027\072\030" +
-    "\065\031\066\032\075\033\076\034\070\035\073\001\002" +
-    "\000\004\024\ufff4\001\002\000\004\036\053\001\002\000" +
-    "\004\024\127\001\002\000\012\002\ufffc\003\ufffc\005\ufffc" +
-    "\006\ufffc\001\002\000\004\036\131\001\002\000\004\004" +
-    "\134\001\002\000\004\024\133\001\002\000\012\002\ufff8" +
-    "\003\ufff8\005\ufff8\006\ufff8\001\002\000\006\023\023\037" +
-    "\024\001\002\000\014\004\136\017\027\020\031\021\032" +
-    "\022\030\001\002\000\006\023\023\037\024\001\002\000" +
-    "\014\004\140\017\027\020\031\021\032\022\030\001\002" +
-    "\000\006\023\023\037\024\001\002\000\014\004\142\017" +
-    "\027\020\031\021\032\022\030\001\002\000\006\023\023" +
-    "\037\024\001\002\000\014\004\144\017\027\020\031\021" +
-    "\032\022\030\001\002\000\006\023\023\037\024\001\002" +
-    "\000\014\004\146\017\027\020\031\021\032\022\030\001" +
-    "\002\000\024\025\071\026\074\027\072\030\065\031\066" +
-    "\032\075\033\076\034\070\035\073\001\002\000\004\024" +
-    "\ufff3\001\002\000\004\036\110\001\002\000\004\024\152" +
-    "\001\002\000\012\002\ufffa\003\ufffa\005\ufffa\006\ufffa\001" +
-    "\002\000\010\002\uffff\003\uffff\005\uffff\001\002\000\004" +
-    "\002\001\001\002" });
+    "\025\001\002\000\014\004\146\017\027\020\031\021\032" +
+    "\022\030\001\002\000\006\023\023\037\025\001\002\000" +
+    "\014\004\150\017\027\020\031\021\032\022\030\001\002" +
+    "\000\024\025\073\026\077\027\075\030\067\031\070\032" +
+    "\076\033\100\034\072\035\074\001\002\000\004\024\ufff2" +
+    "\001\002\000\004\036\112\001\002\000\004\024\154\001" +
+    "\002\000\012\002\ufff9\003\ufff9\005\ufff9\006\ufff9\001\002" +
+    "\000\010\002\ufffe\003\ufffe\005\ufffe\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -137,45 +138,46 @@ public class GeoParser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\152\000\010\002\004\003\003\004\007\001\001\000" +
-    "\002\001\001\000\006\003\152\004\007\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\005\011\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\004\007\016\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\013\021\001\001" +
-    "\000\002\001\001\000\004\013\024\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\013\035" +
-    "\001\001\000\004\013\034\001\001\000\004\013\033\001" +
-    "\001\000\004\013\032\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\004\013" +
-    "\037\001\001\000\002\001\001\000\004\013\041\001\001" +
-    "\000\002\001\001\000\002\001\001\000\004\013\044\001" +
-    "\001\000\002\001\001\000\004\013\046\001\001\000\002" +
-    "\001\001\000\004\013\050\001\001\000\002\001\001\000" +
-    "\004\006\053\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\004\013\056\001\001\000\002\001" +
-    "\001\000\004\013\060\001\001\000\002\001\001\000\004" +
-    "\013\062\001\001\000\002\001\001\000\004\012\066\001" +
+    "\000\153\000\012\002\007\003\003\004\004\005\010\001" +
+    "\001\000\006\004\154\005\010\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\004\006\012\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\004\010\017\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\014\023\001\001\000\004\014\041\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\014\036\001\001" +
+    "\000\004\014\035\001\001\000\004\014\034\001\001\000" +
+    "\004\014\033\001\001\000\004\014\032\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\004\014\040\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\004\014\045\001\001\000\002\001\001\000\004" +
+    "\014\047\001\001\000\002\001\001\000\004\014\051\001" +
+    "\001\000\002\001\001\000\002\001\001\000\004\007\055" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\004\014\060\001\001\000\002\001\001\000\004" +
+    "\014\062\001\001\000\002\001\001\000\004\014\064\001" +
+    "\001\000\002\001\001\000\004\013\070\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\006\104" +
-    "\001\001\000\002\001\001\000\002\001\001\000\004\010" +
-    "\110\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\004\013\113\001\001\000\002\001\001\000" +
-    "\004\013\115\001\001\000\002\001\001\000\004\013\117" +
-    "\001\001\000\002\001\001\000\004\013\121\001\001\000" +
-    "\002\001\001\000\004\012\123\001\001\000\002\001\001" +
-    "\000\004\006\125\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\011\131\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\013\134\001\001\000" +
-    "\002\001\001\000\004\013\136\001\001\000\002\001\001" +
-    "\000\004\013\140\001\001\000\002\001\001\000\004\013" +
-    "\142\001\001\000\002\001\001\000\004\013\144\001\001" +
-    "\000\002\001\001\000\004\012\146\001\001\000\002\001" +
-    "\001\000\004\010\150\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001" });
+    "\001\001\000\002\001\001\000\004\007\106\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\011\112\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\004\014\115\001\001\000\002\001\001\000\004\014\117" +
+    "\001\001\000\002\001\001\000\004\014\121\001\001\000" +
+    "\002\001\001\000\004\014\123\001\001\000\002\001\001" +
+    "\000\004\013\125\001\001\000\002\001\001\000\004\007" +
+    "\127\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\012\133\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\004\014\136\001\001\000\002\001\001" +
+    "\000\004\014\140\001\001\000\002\001\001\000\004\014" +
+    "\142\001\001\000\002\001\001\000\004\014\144\001\001" +
+    "\000\002\001\001\000\004\014\146\001\001\000\002\001" +
+    "\001\000\004\013\150\001\001\000\002\001\001\000\004" +
+    "\011\152\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -214,8 +216,16 @@ public class GeoParser extends java_cup.runtime.lr_parser {
 
 
 
+    private ArrayList<Parameter> parameters = new ArrayList<>();
+    private ArrayList<Operation> operations = new ArrayList<>();
     public GeoParser(GeoLexer lex) {
         super(lex);
+    }
+    public ArrayList<Parameter> getParameters(){
+        return parameters;
+    }
+    public ArrayList<Operation> getOperations(){
+        return operations;
     }
     //Metodo al que se llama ante algun error sintactico
     public void syntax_error(Symbol s){
@@ -252,6 +262,15 @@ public class GeoParser extends java_cup.runtime.lr_parser {
         //Querys.errors.add(err);
     }
 
+    public void countOperations(String lexeme, int line, int col, Expression e1, Expression e2) throws java.lang.Exception{
+        String[] ex1 = e1.getStr().split(" ");
+        String[] ex2 = e2.getStr().split(" ");
+
+        String ex = ex1[ex1.length-1] + " "+lexeme+" "+ ex2[0];
+
+        operations.add(new Operation(lexeme, line, col, ex));
+    }
+
 
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
@@ -278,12 +297,12 @@ class CUP$GeoParser$actions {
       switch (CUP$GeoParser$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // $START ::= instructions EOF 
+          case 0: // $START ::= s EOF 
             {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
 		int start_valright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).right;
-		ArrayList<Parameter> start_val = (ArrayList<Parameter>)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
+		Object start_val = (Object)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
 		RESULT = start_val;
               CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("$START",0, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
@@ -292,7 +311,21 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // instructions ::= instruction 
+          case 1: // s ::= instructions 
+            {
+              Object RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
+		ArrayList<Parameter> i = (ArrayList<Parameter>)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
+		
+    parameters = i;
+    
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("s",0, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+            }
+          return CUP$GeoParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 2: // instructions ::= instruction 
             {
               ArrayList<Parameter> RESULT =null;
 		int ileft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
@@ -301,12 +334,12 @@ class CUP$GeoParser$actions {
 		
             RESULT = i;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instructions",0, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instructions",1, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // instructions ::= instructions instruction 
+          case 3: // instructions ::= instructions instruction 
             {
               ArrayList<Parameter> RESULT =null;
 		int listleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -319,12 +352,12 @@ class CUP$GeoParser$actions {
             list.addAll(i);
             RESULT = list;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instructions",0, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instructions",1, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // instruction ::= graph 
+          case 4: // instruction ::= graph 
             {
               ArrayList<Parameter> RESULT =null;
 		int gleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
@@ -335,12 +368,12 @@ class CUP$GeoParser$actions {
             list.add(g);
             RESULT = list;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instruction",1, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instruction",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // instruction ::= graph animate 
+          case 5: // instruction ::= graph animate 
             {
               ArrayList<Parameter> RESULT =null;
 		int gleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -355,12 +388,12 @@ class CUP$GeoParser$actions {
             list.add(a);
             RESULT = list;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instruction",1, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instruction",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // graph ::= GRAFICAR CIRCLE LPAREN circle_square_param RPAREN 
+          case 6: // graph ::= GRAFICAR CIRCLE LPAREN circle_square_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -370,12 +403,12 @@ class CUP$GeoParser$actions {
             p.setType(Parameter.CIRCLE);
             RESULT = p;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // graph ::= GRAFICAR SQUARE LPAREN circle_square_param RPAREN 
+          case 7: // graph ::= GRAFICAR SQUARE LPAREN circle_square_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -385,12 +418,12 @@ class CUP$GeoParser$actions {
             p.setType(Parameter.SQUARE);
             RESULT = p;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // graph ::= GRAFICAR RECTANGLE LPAREN rectangle_line_param RPAREN 
+          case 8: // graph ::= GRAFICAR RECTANGLE LPAREN rectangle_line_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -400,12 +433,12 @@ class CUP$GeoParser$actions {
             p.setType(Parameter.RECTANGLE);
             RESULT = p;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // graph ::= GRAFICAR LINE LPAREN rectangle_line_param RPAREN 
+          case 9: // graph ::= GRAFICAR LINE LPAREN rectangle_line_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -415,12 +448,12 @@ class CUP$GeoParser$actions {
             p.setType(Parameter.LINE);
             RESULT = p;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // graph ::= GRAFICAR POLYGON LPAREN polygon_param RPAREN 
+          case 10: // graph ::= GRAFICAR POLYGON LPAREN polygon_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -430,12 +463,12 @@ class CUP$GeoParser$actions {
             p.setType(Parameter.POLYGON);
             RESULT = p;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // graph ::= error LPAREN circle_square_param RPAREN 
+          case 11: // graph ::= error LPAREN circle_square_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -444,12 +477,12 @@ class CUP$GeoParser$actions {
 		
 
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // animate ::= ANIMAR OBJETO ANTERIOR LPAREN animate_param RPAREN 
+          case 12: // animate ::= ANIMAR OBJETO ANTERIOR LPAREN animate_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -458,12 +491,12 @@ class CUP$GeoParser$actions {
 		
             RESULT = p;
             
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("animate",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-5)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("animate",4, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-5)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // circle_square_param ::= ID COMMA expr COMMA expr COMMA expr COMMA color 
+          case 13: // circle_square_param ::= ID COMMA expr COMMA expr COMMA expr COMMA color 
             {
               Parameter RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).left;
@@ -471,25 +504,25 @@ class CUP$GeoParser$actions {
 		String id = (String)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).value;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).right;
-		Double e1 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).value;
+		Expression e1 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).value;
 		int e2left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).right;
-		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
+		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
 		int e3left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
 		int e3right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).right;
-		Double e3 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		Expression e3 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
 		int cleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
 		
                     RESULT = new Parameter(Parameter.SQUARE, id, e1, e2, e3, c);
                     
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("circle_square_param",4, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("circle_square_param",5, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // rectangle_line_param ::= ID COMMA expr COMMA expr COMMA expr COMMA expr COMMA color 
+          case 14: // rectangle_line_param ::= ID COMMA expr COMMA expr COMMA expr COMMA expr COMMA color 
             {
               RectangleLineParameter RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-10)).left;
@@ -497,28 +530,28 @@ class CUP$GeoParser$actions {
 		String id = (String)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-10)).value;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).right;
-		Double e1 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).value;
+		Expression e1 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).value;
 		int e2left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).right;
-		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).value;
+		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).value;
 		int e3left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).left;
 		int e3right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).right;
-		Double e3 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
+		Expression e3 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
 		int e4left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
 		int e4right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).right;
-		Double e4 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		Expression e4 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
 		int cleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
 		
                     RESULT = new RectangleLineParameter(Parameter.RECTANGLE, id, e1, e2, e3, e4, c);
                     
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("rectangle_line_param",6, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-10)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("rectangle_line_param",7, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-10)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // polygon_param ::= ID COMMA expr COMMA expr COMMA expr COMMA expr COMMA expr COMMA color 
+          case 15: // polygon_param ::= ID COMMA expr COMMA expr COMMA expr COMMA expr COMMA expr COMMA color 
             {
               PolygonParameter RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-12)).left;
@@ -526,231 +559,260 @@ class CUP$GeoParser$actions {
 		String id = (String)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-12)).value;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-10)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-10)).right;
-		Double e1 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-10)).value;
+		Expression e1 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-10)).value;
 		int e2left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).right;
-		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).value;
+		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).value;
 		int e3left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).left;
 		int e3right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).right;
-		Double e3 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).value;
+		Expression e3 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)).value;
 		int e4left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).left;
 		int e4right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).right;
-		Double e4 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
+		Expression e4 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
 		int e5left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
 		int e5right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).right;
-		Double e5 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		Expression e5 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
 		int cleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
 		
                     RESULT = new PolygonParameter(Parameter.POLYGON, id, e1, e2, e3, e4, e5, c);
                     
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("polygon_param",7, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-12)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("polygon_param",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-12)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // animate_param ::= LINE COMMA expr COMMA expr COMMA expr 
+          case 16: // animate_param ::= LINE COMMA expr COMMA expr COMMA expr 
             {
               Parameter RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).right;
-		Double e1 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
+		Expression e1 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
 		int e2left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).right;
-		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
 		int e3left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int e3right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
-		Double e3 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
+		Expression e3 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
 		
-                    RESULT = new Parameter(Parameter.ANIMATE, "curve", e1, e2, e3, "");
+                    RESULT = new Parameter(Parameter.ANIMATE, "linea", e1, e2, e3, "");
                     
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("animate_param",5, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("animate_param",6, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // animate_param ::= CURVE COMMA expr COMMA expr COMMA expr 
+          case 17: // animate_param ::= CURVE COMMA expr COMMA expr COMMA expr 
             {
               Parameter RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).right;
-		Double e1 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
+		Expression e1 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).value;
 		int e2left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).right;
-		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
 		int e3left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int e3right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
-		Double e3 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
+		Expression e3 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
 		
                     RESULT = new Parameter(Parameter.ANIMATE, "curve", e1, e2, e3, "");
                     
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("animate_param",5, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("animate_param",6, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // color ::= BLUE 
+          case 18: // color ::= BLUE 
             {
               String RESULT =null;
-		RESULT = "#2209c3"; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		RESULT = "azul"; 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // color ::= RED 
+          case 19: // color ::= RED 
             {
               String RESULT =null;
-		RESULT = "#ff0000"; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		RESULT = "rojo"; 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // color ::= YELLOW 
+          case 20: // color ::= YELLOW 
             {
               String RESULT =null;
-		RESULT = "#ffc100"; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		RESULT = "amarillo"; 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // color ::= GREEN 
+          case 21: // color ::= GREEN 
             {
               String RESULT =null;
-		RESULT = "#008000"; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		RESULT = "verde"; 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // color ::= SKY 
+          case 22: // color ::= SKY 
             {
               String RESULT =null;
-		RESULT = "#86cecb"; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		RESULT = "celeste"; 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // color ::= CYAN 
+          case 23: // color ::= CYAN 
             {
               String RESULT =null;
-		RESULT = "#0bdbb6"; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		RESULT = "cyan"; 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // color ::= BLACK 
+          case 24: // color ::= BLACK 
             {
               String RESULT =null;
-		RESULT = "#000000"; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		RESULT = "negro"; 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // color ::= PINK 
+          case 25: // color ::= PINK 
             {
               String RESULT =null;
-		RESULT = "#ffaadd"; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		RESULT = "rosado"; 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // color ::= PURPLE 
+          case 26: // color ::= PURPLE 
             {
               String RESULT =null;
-		RESULT = "#4c00b0"; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",8, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		RESULT = "morado"; 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // expr ::= expr PLUS expr 
+          case 27: // expr ::= expr PLUS expr 
             {
-              Double RESULT =null;
+              Expression RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).right;
-		Double e1 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		Expression e1 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		int sleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).right;
+		Object s = (Object)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
 		int e2left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
-		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
-		 RESULT = e1 + e2; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
+		
+        countOperations("+", sleft, sright, e1, e2);
+        RESULT = new Expression(e1.getStr() +" + "+ e2.getStr(), e1.getValue() + e2.getValue());
+        
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",10, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // expr ::= expr MINUS expr 
+          case 28: // expr ::= expr MINUS expr 
             {
-              Double RESULT =null;
+              Expression RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).right;
-		Double e1 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		Expression e1 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		int sleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).right;
+		Object s = (Object)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
 		int e2left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
-		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
-		 RESULT = e1 - e2; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
+		
+        countOperations("-", sleft, sright, e1, e2);
+        RESULT = new Expression(e1.getStr() +" - "+ e2.getStr(), e1.getValue() - e2.getValue());
+        
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",10, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // expr ::= expr TIMES expr 
+          case 29: // expr ::= expr TIMES expr 
             {
-              Double RESULT =null;
+              Expression RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).right;
-		Double e1 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		Expression e1 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		int sleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).right;
+		Object s = (Object)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
 		int e2left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
-		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
-		 RESULT = e1 * e2; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
+		
+        countOperations("*", sleft, sright, e1, e2);
+        RESULT = new Expression(e1.getStr() +" * "+ e2.getStr(), e1.getValue() * e2.getValue());
+        
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",10, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // expr ::= expr DIVISION expr 
+          case 30: // expr ::= expr DIVISION expr 
             {
-              Double RESULT =null;
+              Expression RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).right;
-		Double e1 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		Expression e1 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).value;
+		int sleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).right;
+		Object s = (Object)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
 		int e2left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
-		Double e2 = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
-		 RESULT = e1 / e2; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		Expression e2 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
+		
+        countOperations("/", sleft, sright, e1, e2);
+        if(e2.getValue()!=0) RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), e1.getValue() / e2.getValue());
+        else RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), 0);
+        
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",10, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // expr ::= LPAREN expr RPAREN 
+          case 31: // expr ::= LPAREN expr RPAREN 
             {
-              Double RESULT =null;
+              Expression RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).right;
-		Double e = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
-		 RESULT = e; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		Expression e = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
+		 RESULT = new Expression("( "+e.getStr()+" ) ", e.getValue()); 
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",10, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // expr ::= DIGIT 
+          case 32: // expr ::= DIGIT 
             {
-              Double RESULT =null;
+              Expression RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
 		Double d = (Double)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
-		 RESULT = d; 
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+		
+        DecimalFormat df = new DecimalFormat("0.#");
+
+        RESULT = new Expression(df.format(d), d);
+        
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",10, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 

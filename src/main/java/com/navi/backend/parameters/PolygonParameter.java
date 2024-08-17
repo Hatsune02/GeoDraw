@@ -1,11 +1,12 @@
 package com.navi.backend.parameters;
+import com.navi.backend.parser_lexer.Expression;
 import lombok.*;
 
 @Getter @Setter
 public class PolygonParameter extends Parameter{
-    private double val4, val5;
+    private Expression val4, val5;
     private String color;
-    public PolygonParameter(int type, String id, double val1, double val2, double val3, double val4, double val5, String color) {
+    public PolygonParameter(int type, String id, Expression val1, Expression val2, Expression val3, Expression val4, Expression val5, String color) {
         super(type, id, val1, val2, val3, color);
         this.val4 = val4;
         this.val5 = val5;
@@ -13,20 +14,15 @@ public class PolygonParameter extends Parameter{
     }
 
     @Override
-    public void doAction() {
-        super.doAction();
-    }
-
-    @Override
     public String toString() {
         return "Parameter{" +
                 "type=" + getType() +
                 ", id='" + getId() + '\'' +
-                ", val1=" + getVal1() +
-                ", val2=" + getVal2() +
-                ", val3=" + getVal3() +
-                ", val3=" + val4 +
-                ", val3=" + val5 +
+                ", val1=" + getVal1().getStr() +
+                ", val2=" + getVal2().getStr() +
+                ", val3=" + getVal3().getStr() +
+                ", val3=" + val4.getStr() +
+                ", val3=" + val5.getStr() +
                 ", val3=" + color +
                 '}';
     }

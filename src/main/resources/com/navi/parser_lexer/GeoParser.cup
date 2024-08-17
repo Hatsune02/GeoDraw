@@ -2,11 +2,20 @@ package com.navi.backend.parser_lexer;
 import java_cup.runtime.*;
 import java.util.*;
 import com.navi.backend.parameters.*;
+import java.text.DecimalFormat;
 
 parser code
 {:
+    private ArrayList<Parameter> parameters = new ArrayList<>();
+    private ArrayList<Operation> operations = new ArrayList<>();
     public GeoParser(GeoLexer lex) {
         super(lex);
+    }
+    public ArrayList<Parameter> getParameters(){
+        return parameters;
+    }
+    public ArrayList<Operation> getOperations(){
+        return operations;
     }
     //Metodo al que se llama ante algun error sintactico
     public void syntax_error(Symbol s){
@@ -42,6 +51,15 @@ parser code
         //TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
         //Querys.errors.add(err);
     }
+
+    public void countOperations(String lexeme, int line, int col, Expression e1, Expression e2) throws java.lang.Exception{
+        String[] ex1 = e1.getStr().split(" ");
+        String[] ex2 = e2.getStr().split(" ");
+
+        String ex = ex1[ex1.length-1] + " "+lexeme+" "+ ex2[0];
+
+        operations.add(new Operation(lexeme, line, col, ex));
+    }
 :}
 
 terminal COMMA, GRAFICAR, ANIMAR, OBJETO, ANTERIOR, LINE, CURVE, CIRCLE,
@@ -53,6 +71,8 @@ terminal String ID;
 
 terminal Double DIGIT;
 
+non terminal s;
+
 non terminal ArrayList<Parameter> instructions, instruction;
 
 non terminal Parameter graph, animate,  circle_square_param, animate_param;
@@ -61,17 +81,22 @@ non terminal RectangleLineParameter rectangle_line_param;
 
 non terminal PolygonParameter polygon_param;
 
-
 non terminal String color;
 
-non terminal Double expr;
+non terminal Expression expr;
 
 
 //Presedencia
 precedence left PLUS, MINUS;
 precedence left TIMES, DIVISION;
 
-start with instructions;
+start with s;
+
+s ::= instructions:i
+    {:
+    parameters = i;
+    :}
+        ;
 
 instructions ::= instruction:i
             {:
@@ -156,7 +181,7 @@ polygon_param ::=   ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA expr:e
 
 animate_param ::=     LINE COMMA expr:e1 COMMA expr:e2 COMMA expr:e3
                     {:
-                    RESULT = new Parameter(Parameter.ANIMATE, "curve", e1, e2, e3, "");
+                    RESULT = new Parameter(Parameter.ANIMATE, "linea", e1, e2, e3, "");
                     :}
                     | CURVE COMMA expr:e1 COMMA expr:e2 COMMA expr:e3
                     {:
@@ -164,22 +189,43 @@ animate_param ::=     LINE COMMA expr:e1 COMMA expr:e2 COMMA expr:e3
                     :}
                 ;
 
-color ::=    BLUE   {:RESULT = "#2209c3"; :}
-            |RED    {:RESULT = "#ff0000"; :}
-            |YELLOW {:RESULT = "#ffc100"; :}
-            |GREEN  {:RESULT = "#008000"; :}
-            |SKY    {:RESULT = "#86cecb"; :}
-            |CYAN   {:RESULT = "#0bdbb6"; :}
-            |BLACK  {:RESULT = "#000000"; :}
-            |PINK   {:RESULT = "#ffaadd"; :}
-            |PURPLE {:RESULT = "#4c00b0"; :}
+color ::=    BLUE   {:RESULT = "azul"; :}
+            |RED    {:RESULT = "rojo"; :}
+            |YELLOW {:RESULT = "amarillo"; :}
+            |GREEN  {:RESULT = "verde"; :}
+            |SKY    {:RESULT = "celeste"; :}
+            |CYAN   {:RESULT = "cyan"; :}
+            |BLACK  {:RESULT = "negro"; :}
+            |PINK   {:RESULT = "rosado"; :}
+            |PURPLE {:RESULT = "morado"; :}
             ;
 
-expr ::=  expr:e1 PLUS expr:e2      {: RESULT = e1 + e2; :}
-        | expr:e1 MINUS expr:e2     {: RESULT = e1 - e2; :}
-        | expr:e1 TIMES expr:e2     {: RESULT = e1 * e2; :}
-        | expr:e1 DIVISION expr:e2  {: RESULT = e1 / e2; :}
-        | LPAREN expr:e RPAREN      {: RESULT = e; :}
-        | DIGIT:d                   {: RESULT = d; :}
+expr ::=  expr:e1 PLUS:s expr:e2
+        {:
+        countOperations("+", sleft, sright, e1, e2);
+        RESULT = new Expression(e1.getStr() +" + "+ e2.getStr(), e1.getValue() + e2.getValue());
+        :}
+        | expr:e1 MINUS:s expr:e2
+        {:
+        countOperations("-", sleft, sright, e1, e2);
+        RESULT = new Expression(e1.getStr() +" - "+ e2.getStr(), e1.getValue() - e2.getValue());
+        :}
+        | expr:e1 TIMES:s expr:e2
+        {:
+        countOperations("*", sleft, sright, e1, e2);
+        RESULT = new Expression(e1.getStr() +" * "+ e2.getStr(), e1.getValue() * e2.getValue());
+        :}
+        | expr:e1 DIVISION:s expr:e2
+        {:
+        countOperations("/", sleft, sright, e1, e2);
+        if(e2.getValue()!=0) RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), e1.getValue() / e2.getValue());
+        else RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), 0);
+        :}
+        | LPAREN expr:e RPAREN      {: RESULT = new Expression("( "+e.getStr()+" ) ", e.getValue()); :}
+        | DIGIT:d                   {:
+        DecimalFormat df = new DecimalFormat("0.#");
+
+        RESULT = new Expression(df.format(d), d);
+        :}
         ;
 

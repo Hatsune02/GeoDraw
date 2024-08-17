@@ -1,4 +1,5 @@
 package com.navi.backend.parameters;
+import com.navi.backend.parser_lexer.Expression;
 import lombok.*;
 
 @Setter @Getter @Builder
@@ -13,22 +14,19 @@ public class Parameter {
 
     private int type;
     private String id;
-    private double val1;
-    private double val2;
-    private double val3;
+    private Expression val1;
+    private Expression val2;
+    private Expression val3;
     private String color;
-    public void doAction(){
-
-    }
 
     @Override
     public String toString() {
         return "Parameter{" +
                 "type=" + type +
                 ", id='" + id + '\'' +
-                ", val1=" + val1 +
-                ", val2=" + val2 +
-                ", val3=" + val3 +
+                ", val1=" + val1.getStr() +
+                ", val2=" + val2.getStr() +
+                ", val3=" + val3.getStr() +
                 '}';
     }
 }

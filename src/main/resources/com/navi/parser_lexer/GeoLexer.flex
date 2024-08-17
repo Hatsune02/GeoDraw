@@ -40,7 +40,7 @@ green = (verde)
 sky = (celeste)
 cyan = (cyan)
 black = (negro)
-pink = (rosa)
+pink = (rosado)
 purple = (morado)
 
     /* animation */
@@ -54,7 +54,7 @@ rectangle = (rectangulo)
 polygon = (poligono)
 
 /* Others */
-Identifier = [-_a-zA-Z0-9]+
+Identifier = [_a-zA-Z0-9]+
 Digit = [0-9]+
 Decimal = {Digit}\.{Digit}
 Comma = [,]

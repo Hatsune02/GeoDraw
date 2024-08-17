@@ -1,19 +1,15 @@
 package com.navi.backend.parameters;
+import com.navi.backend.parser_lexer.Expression;
 import lombok.*;
 
 @Getter @Setter
 public class RectangleLineParameter extends Parameter{
-    private double val4;
+    private Expression val4;
     private String color;
-    public RectangleLineParameter(int type, String id, double val1, double val2, double val3, double val4, String color) {
+    public RectangleLineParameter(int type, String id, Expression val1, Expression val2, Expression val3, Expression val4, String color) {
         super(type, id, val1, val2, val3, color);
         this.val4 = val4;
         this.color = color;
-    }
-
-    @Override
-    public void doAction() {
-        super.doAction();
     }
 
     @Override
@@ -21,10 +17,10 @@ public class RectangleLineParameter extends Parameter{
         return "Parameter{" +
                 "type=" + getType() +
                 ", id='" + getId() + '\'' +
-                ", val1=" + getVal1() +
-                ", val2=" + getVal2() +
-                ", val3=" + getVal3() +
-                ", val3=" + val4 +
+                ", val1=" + getVal1().getStr() +
+                ", val2=" + getVal2().getStr() +
+                ", val3=" + getVal3().getStr() +
+                ", val3=" + val4.getStr() +
                 ", val3=" + color +
                 '}';
     }
