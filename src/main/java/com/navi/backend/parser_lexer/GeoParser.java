@@ -9,6 +9,7 @@ import java_cup.runtime.*;
 import java.util.*;
 import com.navi.backend.parameters.*;
 import java.text.DecimalFormat;
+import com.navi.backend.parser_lexer.errors_lp.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -236,17 +237,9 @@ public class GeoParser extends java_cup.runtime.lr_parser {
         System.out.println("\tLexeme: " + lexeme);
         System.out.println("\trow: " + line);
         System.out.println("\tcol: " + col);
-        /*
-        TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
-        Querys.errors.add(err);
-        try {
-           while(true){
-                if(getScanner().next_token().sym == sym.P_COMA) break;
-            }
-            parse();
-        } catch (Exception e) {
-            //throw new RuntimeException(e);
-        }*/
+
+        addError(lexeme, line, col, "Se esperaba una instruccion para graficar");
+
     }
 
     //Metodo que se llama en el momento en que ya no es posible una recuperacion
@@ -269,6 +262,9 @@ public class GeoParser extends java_cup.runtime.lr_parser {
         String ex = ex1[ex1.length-1] + " "+lexeme+" "+ ex2[0];
 
         operations.add(new Operation(lexeme, line, col, ex));
+    }
+    private void addError(String lexeme, int line, int col, String description){
+        ErrorsLP.addError(lexeme, line, col, "Error Sintáctico", description);
     }
 
 
@@ -471,11 +467,15 @@ class CUP$GeoParser$actions {
           case 11: // graph ::= error LPAREN circle_square_param RPAREN 
             {
               Parameter RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)).value;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
 		int pright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).right;
 		Parameter p = (Parameter)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
 		
-
+            addError(e.toString(), eleft, eright, "Se esperaba una instruccion para graficar");
+            System.out.println("ola");
             
               CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
@@ -596,7 +596,7 @@ class CUP$GeoParser$actions {
 		int e3right = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).right;
 		Expression e3 = (Expression)((java_cup.runtime.Symbol) CUP$GeoParser$stack.peek()).value;
 		
-                    RESULT = new Parameter(Parameter.ANIMATE, "linea", e1, e2, e3, "");
+                    RESULT = new Parameter(Parameter.ANIMATE, "line", e1, e2, e3, "");
                     
               CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("animate_param",6, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-6)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }

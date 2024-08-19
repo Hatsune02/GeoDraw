@@ -3,6 +3,7 @@ import java_cup.runtime.*;
 import java.util.*;
 import com.navi.backend.parameters.*;
 import java.text.DecimalFormat;
+import com.navi.backend.parser_lexer.errors_lp.*;
 
 parser code
 {:
@@ -26,17 +27,8 @@ parser code
         System.out.println("\tLexeme: " + lexeme);
         System.out.println("\trow: " + line);
         System.out.println("\tcol: " + col);
-        /*
-        TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
-        Querys.errors.add(err);
-        try {
-           while(true){
-                if(getScanner().next_token().sym == sym.P_COMA) break;
-            }
-            parse();
-        } catch (Exception e) {
-            //throw new RuntimeException(e);
-        }*/
+
+        addError(lexeme, line, col, "Se esperaba una instruccion para graficar");
     }
 
     //Metodo que se llama en el momento en que ya no es posible una recuperacion
@@ -59,6 +51,9 @@ parser code
         String ex = ex1[ex1.length-1] + " "+lexeme+" "+ ex2[0];
 
         operations.add(new Operation(lexeme, line, col, ex));
+    }
+    private void addError(String lexeme, int line, int col, String description){
+        ErrorsLP.addError(lexeme, line, col, "Error Sintáctico", description);
     }
 :}
 
@@ -149,9 +144,10 @@ graph ::=     GRAFICAR CIRCLE LPAREN circle_square_param:p RPAREN
             p.setType(Parameter.POLYGON);
             RESULT = p;
             :}
-            | error LPAREN circle_square_param:p RPAREN
+            | error:e LPAREN circle_square_param:p RPAREN
             {:
-
+            addError(e.toString(), eleft, eright, "Se esperaba una instruccion para graficar");
+            System.out.println("ola");
             :}
             ;
 
@@ -181,7 +177,7 @@ polygon_param ::=   ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA expr:e
 
 animate_param ::=     LINE COMMA expr:e1 COMMA expr:e2 COMMA expr:e3
                     {:
-                    RESULT = new Parameter(Parameter.ANIMATE, "linea", e1, e2, e3, "");
+                    RESULT = new Parameter(Parameter.ANIMATE, "line", e1, e2, e3, "");
                     :}
                     | CURVE COMMA expr:e1 COMMA expr:e2 COMMA expr:e3
                     {:

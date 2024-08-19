@@ -24,9 +24,9 @@ public class Parameter {
         return "Parameter{" +
                 "type=" + type +
                 ", id='" + id + '\'' +
-                ", val1=" + val1.getStr() +
-                ", val2=" + val2.getStr() +
-                ", val3=" + val3.getStr() +
+                ", val1=" + val1.getValue() +
+                ", val2=" + val2.getValue() +
+                ", val3=" + val3.getValue() +
                 '}';
     }
 }

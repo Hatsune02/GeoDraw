@@ -18,11 +18,11 @@ public class PolygonParameter extends Parameter{
         return "Parameter{" +
                 "type=" + getType() +
                 ", id='" + getId() + '\'' +
-                ", val1=" + getVal1().getStr() +
-                ", val2=" + getVal2().getStr() +
-                ", val3=" + getVal3().getStr() +
-                ", val3=" + val4.getStr() +
-                ", val3=" + val5.getStr() +
+                ", val1=" + getVal1().getValue() +
+                ", val2=" + getVal2().getValue() +
+                ", val3=" + getVal3().getValue() +
+                ", val3=" + val4.getValue() +
+                ", val3=" + val5.getValue() +
                 ", val3=" + color +
                 '}';
     }

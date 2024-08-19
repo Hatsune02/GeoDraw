@@ -6,7 +6,7 @@ package com.navi.backend.parser_lexer;
 import java_cup.runtime.*;
 import static com.navi.backend.parser_lexer.sym.*;
 import com.navi.backend.parameters.*;
-import java.util.ArrayList;
+import com.navi.backend.parser_lexer.errors_lp.*;
 
 @SuppressWarnings("fallthrough")
 public class GeoLexer implements java_cup.runtime.Scanner {
@@ -570,8 +570,6 @@ public class GeoLexer implements java_cup.runtime.Scanner {
   private boolean zzEOFDone;
 
   /* user code: */
-    //public static ArrayList<TError> errors = new ArrayList<>();
-
     private Symbol symbol(int type){
         return new Symbol(type, yyline+1,yycolumn+1);
     }
@@ -580,8 +578,7 @@ public class GeoLexer implements java_cup.runtime.Scanner {
     }
     private void error(){
         System.out.println("Error en linea: "+(yyline+1)+", columna: "+(yycolumn+1));
-        //TError err = new TError(yytext(), "Error Léxico", "Símbolo inválido", yyline+1, yycolumn+1);
-        //errors.add(err);
+        ErrorsLP.addError(yytext(), yyline+1, yycolumn+1, "Error Léxico","Cadena no definida");
     }
 
 
@@ -1021,7 +1018,7 @@ public class GeoLexer implements java_cup.runtime.Scanner {
           // fall through
           case 33: break;
           case 3:
-            { /*Errors.getErrors().addLS(yyline+1, yycolumn+1, "Cadena no definida", yytext(), Errors.LEXICAL);*/
+            { ErrorsLP.addError(yytext(), yyline+1, yycolumn+1, "Error Léxico","Cadena no definida");
             }
           // fall through
           case 34: break;

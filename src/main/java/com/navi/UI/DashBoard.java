@@ -2,9 +2,8 @@ package com.navi.UI;
 
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
 import com.navi.backend.parameters.*;
-import com.navi.backend.parser_lexer.GeoLexer;
-import com.navi.backend.parser_lexer.GeoParser;
-import com.navi.backend.parser_lexer.Operation;
+import com.navi.backend.parser_lexer.*;
+import com.navi.backend.parser_lexer.errors_lp.*;
 
 import java.awt.*;
 import javax.swing.*;
@@ -26,7 +25,6 @@ public class DashBoard extends javax.swing.JFrame {
     private void initStyles(){
         setTitle("GeoDraw");
 
-
         NumeroLinea numberLine = new NumeroLinea(textPane);
         scrollTextPane.setRowHeaderView(numberLine);
 
@@ -36,6 +34,8 @@ public class DashBoard extends javax.swing.JFrame {
         styleMikuLabel(lineLabel);
         styleMikuLabel(columnLabel);
         styleMikuMenu(file);
+        styleMikuMenu(canvasMenu);
+        styleMikuMenu(reportsMenu);
 
     }
 
@@ -224,6 +224,7 @@ public class DashBoard extends javax.swing.JFrame {
         moveButton = new javax.swing.JButton();
         lineLabel = new javax.swing.JLabel();
         columnLabel = new javax.swing.JLabel();
+        scrollCanvas = new javax.swing.JScrollPane();
         canvas = new Canvas();
         menu = new javax.swing.JMenuBar();
         file = new javax.swing.JMenu();
@@ -234,6 +235,8 @@ public class DashBoard extends javax.swing.JFrame {
         exportPdf = new javax.swing.JMenuItem();
         exportPng = new javax.swing.JMenuItem();
         canvasMenu = new javax.swing.JMenu();
+        lightTheme = new javax.swing.JMenuItem();
+        darkTheme = new javax.swing.JMenuItem();
         cleanCanvas = new javax.swing.JMenuItem();
         reportsMenu = new javax.swing.JMenu();
         operationReportI = new javax.swing.JMenuItem();
@@ -271,7 +274,7 @@ public class DashBoard extends javax.swing.JFrame {
                         .addGroup(panelScrollLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(panelScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(scrollTextPane, javax.swing.GroupLayout.DEFAULT_SIZE, 915, Short.MAX_VALUE)
+                                        .addComponent(scrollTextPane)
                                         .addGroup(panelScrollLayout.createSequentialGroup()
                                                 .addComponent(compileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -300,12 +303,14 @@ public class DashBoard extends javax.swing.JFrame {
         canvas.setLayout(canvasLayout);
         canvasLayout.setHorizontalGroup(
                 canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 925, Short.MAX_VALUE)
         );
         canvasLayout.setVerticalGroup(
                 canvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 401, Short.MAX_VALUE)
+                        .addGap(0, 399, Short.MAX_VALUE)
         );
+
+        scrollCanvas.setViewportView(canvas);
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
@@ -314,7 +319,7 @@ public class DashBoard extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(canvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(scrollCanvas)
                                         .addComponent(panelScroll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
         );
@@ -322,7 +327,7 @@ public class DashBoard extends javax.swing.JFrame {
                 backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(canvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(scrollCanvas)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(panelScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
@@ -377,6 +382,22 @@ public class DashBoard extends javax.swing.JFrame {
         menu.add(file);
 
         canvasMenu.setText("Lienzo");
+
+        lightTheme.setText("Claro");
+        lightTheme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lightThemeActionPerformed(evt);
+            }
+        });
+        canvasMenu.add(lightTheme);
+
+        darkTheme.setText("Oscuro");
+        darkTheme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                darkThemeActionPerformed(evt);
+            }
+        });
+        canvasMenu.add(darkTheme);
 
         cleanCanvas.setText("Limpiar");
         cleanCanvas.addActionListener(new java.awt.event.ActionListener() {
@@ -448,17 +469,18 @@ public class DashBoard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-
     private void compileButtonActionPerformed(java.awt.event.ActionEvent evt) {
         /*canvas.addFigure(Parameter.CIRCLE, "circulo1", "azul", 20, 100, 30);
         canvas.addMotion(2,100,200,2);
-        canvas.addFigure(Parameter.SQUARE, "cuadrado1", "rojo", 120, 100, 50);
+        canvas.addFigure(Parameter.SQUARE, "cuadrado1", "rojo", 120, 800, 50);
         canvas.addMotion(1,100,200,4);
         canvas.addFigure(Parameter.RECTANGLE, "rectangulo1", "verde", 200, 100, 50, 80);
         canvas.addFigure(Parameter.LINE, "linea2", "celeste", 340, 100, 380, 120);
         canvas.addFigure(Parameter.POLYGON, "poligono", "cyan", 480, 100, 3, 100, 100);
         canvas.addMotion(1,100,200,1);
 
+        canvas.revalidate();
+        //canvas.setPreferredSize(new Dimension(800, 1100));
         canvas.repaint();
 
         canvas.moveFigure(canvas.getFigures().get(0),4000);*/
@@ -468,13 +490,18 @@ public class DashBoard extends javax.swing.JFrame {
             parser = new GeoParser(lexer);
             try {
                 parser.parse();
-                parser.getParameters().forEach(param -> System.out.println(param.toString()));
-                canvas.setParameters(parser.getParameters());
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,"Se detectaron errores al momento de ejecutar la query","Error",JOptionPane.ERROR_MESSAGE);
-
+                //JOptionPane.showMessageDialog(this,"Se detectaron errores al momento de compilar","Error",JOptionPane.ERROR_MESSAGE);
             }
 
+            if(ErrorsLP.getErrors().isEmpty()){
+                JOptionPane.showMessageDialog(this,"La compilación ha sido exitosa","Listo!",JOptionPane.INFORMATION_MESSAGE);
+                parser.getParameters().forEach(param -> System.out.println(param.toString()));
+                canvas.setParameters(parser.getParameters());
+            }
+            else{
+                JOptionPane.showMessageDialog(this,"Se detectaron errores al momento de compilar","Error",JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -554,10 +581,18 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     private void operationReportIActionPerformed(java.awt.event.ActionEvent evt) {
-        ReportTable table = new ReportTable();
-        String[] columns = {"Operador", "Línea","Columna","Ocurrencia"};
-        initReport(table,"Reporte de ocurrencias de operadores matemáticos",columns);
-        countOperations(table);
+        if(parser.getOperations().isEmpty()){
+            JOptionPane.showMessageDialog(this,"No se encontro ninguna operacion.","No hay datos",JOptionPane.ERROR_MESSAGE);
+        }
+        else if(!ErrorsLP.getErrors().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Existen errores en el texto, revise que este todo correcto","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            ReportTable table = new ReportTable();
+            String[] columns = {"Operador", "Línea","Columna","Ocurrencia"};
+            initReport(table,"Reporte de ocurrencias de operadores matemáticos",columns);
+            countOperations(table);
+        }
     }
     private void countOperations(ReportTable table) {
         for(Operation op: parser.getOperations()){
@@ -566,10 +601,18 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     private void colorsReportIActionPerformed(java.awt.event.ActionEvent evt) {
-        ReportTable table = new ReportTable();
-        String[] columns = {"Color", "Cantidad de uso"};
-        initReport(table,"Reporte de colores usados",columns);
-        countForColors(table);
+        if(parser.getParameters().isEmpty()){
+            JOptionPane.showMessageDialog(this,"No se encontro ningun color.","No hay datos",JOptionPane.ERROR_MESSAGE);
+        }
+        else if(!ErrorsLP.getErrors().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Existen errores en el texto, revise que este todo correcto","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            ReportTable table = new ReportTable();
+            String[] columns = {"Color", "Cantidad de uso"};
+            initReport(table, "Reporte de colores usados", columns);
+            countForColors(table);
+        }
     }
     private void countForColors(ReportTable table){
         int countBlue = 0;
@@ -630,11 +673,19 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     private void objectsReportIActionPerformed(java.awt.event.ActionEvent evt) {
-        ReportTable table = new ReportTable();
-        String[] columns = {"Objeto", "Cantidad de uso"};
-        initReport(table,"Reporte de objetos usados",columns);
+        if(parser.getParameters().isEmpty()){
+            JOptionPane.showMessageDialog(this,"No se encontro ningun objeto.","No hay datos",JOptionPane.ERROR_MESSAGE);
+        }
+        else if(!ErrorsLP.getErrors().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Existen errores en el texto, revise que este todo correcto","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            ReportTable table = new ReportTable();
+            String[] columns = {"Objeto", "Cantidad de uso"};
+            initReport(table, "Reporte de objetos usados", columns);
 
-        countObjects(table);
+            countObjects(table);
+        }
     }
     private void countObjects(ReportTable table){
         int countCircle = 0;
@@ -673,11 +724,19 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     private void animationsReportIActionPerformed(java.awt.event.ActionEvent evt) {
-        ReportTable table = new ReportTable();
-        String[] columns = {"Animación", "Cantidad de uso"};
-        initReport(table,"Reporte de animaciones usados",columns);
+        if(parser.getOperations().isEmpty()){
+            JOptionPane.showMessageDialog(this,"No se encontro ninguna operacion.","No hay datos",JOptionPane.ERROR_MESSAGE);
+        }
+        else if(!ErrorsLP.getErrors().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Existen errores en el texto, revise que este todo correcto","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            ReportTable table = new ReportTable();
+            String[] columns = {"Animación", "Cantidad de uso"};
+            initReport(table, "Reporte de animaciones usados", columns);
 
-        countAnimation(table);
+            countAnimation(table);
+        }
     }
     private void countAnimation(ReportTable table){
         int countLine = 0;
@@ -701,10 +760,22 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     private void errorsReportIActionPerformed(java.awt.event.ActionEvent evt) {
-        ReportTable table = new ReportTable();
-        String[] columns = {"Lexema", "Línea", "Columna", "Tipo", "Descripción"};
-        initReport(table,"Reporte de Errores",columns);
 
+        if(ErrorsLP.getErrors().isEmpty()){
+            JOptionPane.showMessageDialog(this,"No hay ningun error :)","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            ReportTable table = new ReportTable();
+            String[] columns = {"Lexema", "Línea", "Columna", "Tipo", "Descripción"};
+            initReport(table, "Reporte de Errores", columns);
+            addErrorsReport(table);
+        }
+
+    }
+    private void addErrorsReport(ReportTable table){
+        for(TError e: ErrorsLP.getErrors()){
+            table.addRow(new Object[]{e.getLexeme(), e.getLine(), e.getColumn(), e.getType(), e.getDescription()});
+        }
     }
 
     private void initReport(ReportTable table, String menu, String[] columns){
@@ -718,15 +789,23 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     private void exportPdfActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        canvas.exportToPDF();
     }
 
     private void exportPngActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        canvas.exportToPNG();
     }
 
     private void cleanCanvasActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        canvas.clearCanvas();
+    }
+
+    private void darkThemeActionPerformed(java.awt.event.ActionEvent evt) {
+        canvas.setBackground(new Color(33,33,33));
+    }
+
+    private void lightThemeActionPerformed(java.awt.event.ActionEvent evt) {
+        canvas.setBackground(new Color(196, 199, 211));
     }
 
     public static void main(String args[]) {
@@ -750,11 +829,13 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JMenuItem colorsReportI;
     private javax.swing.JLabel columnLabel;
     private javax.swing.JButton compileButton;
+    private javax.swing.JMenuItem darkTheme;
     private javax.swing.JMenuItem errorsReportI;
     private javax.swing.JMenu exportFigures;
     private javax.swing.JMenuItem exportPdf;
     private javax.swing.JMenuItem exportPng;
     private javax.swing.JMenu file;
+    private javax.swing.JMenuItem lightTheme;
     private javax.swing.JLabel lineLabel;
     private javax.swing.JMenuBar menu;
     private javax.swing.JButton moveButton;
@@ -765,6 +846,7 @@ public class DashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel panelScroll;
     private javax.swing.JMenu reportsMenu;
     private javax.swing.JMenuItem saveFile;
+    private javax.swing.JScrollPane scrollCanvas;
     private javax.swing.JScrollPane scrollTextPane;
     private javax.swing.JTextPane textPane;
     // End of variables declaration//GEN-END:variables

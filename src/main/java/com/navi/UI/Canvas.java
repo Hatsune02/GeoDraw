@@ -4,10 +4,19 @@ import com.navi.UI.figures.Figure;
 import com.navi.UI.figures.Line;
 import com.navi.UI.figures.Polygon;
 import com.navi.backend.parameters.*;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -30,23 +39,27 @@ public class Canvas extends JPanel implements MouseListener {
             case Parameter.CIRCLE:
                 double radius = params[2];
                 shape = new Ellipse2D.Double(x, y, radius*2, radius*2);
+                adjustPreferredSize(x, y, radius, radius);
                 break;
 
             case Parameter.SQUARE:
                 double side = params[2];
                 shape = new Rectangle2D.Double(x, y, side, side);
+                adjustPreferredSize(x, y, side, side);
                 break;
 
             case Parameter.RECTANGLE:
                 double width = params[2];
                 double height = params[3];
                 shape = new Rectangle2D.Double(x, y, width, height);
+                adjustPreferredSize(x, y, width, height);
                 break;
 
             case Parameter.LINE:
                 double x2 = params[2];
                 double y2 = params[3];
                 shape = new Line2D.Double(x, y, x2, y2);
+                adjustPreferredSize(x, y, x2, y2);
                 break;
 
             case Parameter.POLYGON:
@@ -55,6 +68,7 @@ public class Canvas extends JPanel implements MouseListener {
                 double polygonHeight = params[4];
                 Path2D.Double polygon = createPolygon(x, y, sides, polygonWidth, polygonHeight);
                 shape = polygon;
+                adjustPreferredSize(x, y, polygonWidth, polygonHeight);
                 break;
         }
         Figure fig;
@@ -77,17 +91,39 @@ public class Canvas extends JPanel implements MouseListener {
         figures.add(fig);
     }
 
+    private void adjustPreferredSize(double x, double y, double width, double height) {
+        Dimension currentSize = getSize();
+        Dimension preferredSize = getPreferredSize();
+
+        boolean shouldResize = false;
+
+        if (x > currentSize.width || width > currentSize.height) {
+            preferredSize.width = (int) x + (int) width + 20; // Ajusta el ancho preferido
+            shouldResize = true;
+        }
+
+        if (y > currentSize.height) {
+            preferredSize.height = (int) y + (int) height + 20; // Ajusta la altura preferida
+            shouldResize = true;
+        }
+
+        if (shouldResize) {
+            setPreferredSize(preferredSize);
+            revalidate();
+        }
+    }
+
     private Path2D.Double createPolygon(double x, double y, double sides, double polygonWidth, double polygonHeight) {
         Path2D.Double polygon = new Path2D.Double();
         double angle = 2 * Math.PI / sides;
 
-        double initialX = x + (polygonWidth / 2 * Math.cos(0));
-        double initialY = y + (polygonHeight / 2 * Math.sin(0));
+        double initialX = (x+polygonWidth/2) + (polygonWidth / 2 * Math.cos(0));
+        double initialY = (y+polygonHeight/2) + (polygonHeight / 2 * Math.sin(0));
         polygon.moveTo(initialX, initialY);
 
         for (int i = 1; i < sides; i++) {
-            double xPoint = x + (polygonWidth / 2 * Math.cos(angle * i));
-            double yPoint = y + (polygonHeight / 2 * Math.sin(angle * i));
+            double xPoint = (x+polygonWidth/2) + (polygonWidth / 2 * Math.cos(angle * i));
+            double yPoint = (y+polygonHeight/2) + (polygonHeight / 2 * Math.sin(angle * i));
             polygon.lineTo(xPoint, yPoint);
         }
         polygon.closePath();
@@ -117,6 +153,7 @@ public class Canvas extends JPanel implements MouseListener {
 
         long startTime = System.currentTimeMillis();
 
+        System.out.println(figure.getFinalX() + " " + figure.getFinalY());
         timer.addActionListener(e -> {
             long elapsed = System.currentTimeMillis() - startTime;
             double t = Math.min(1.0, (double) elapsed / duration);
@@ -134,7 +171,6 @@ public class Canvas extends JPanel implements MouseListener {
                 newY = Math.pow(1 - t, 2) * y1 + 2 * (1 - t) * t * finalControlY + Math.pow(t, 2) * figure.getFinalY();
             }
             System.out.println("x: " + newX + " y: " + newY);
-
             if (figure.getShape() instanceof Rectangle2D) {
                 Rectangle2D rect = (Rectangle2D) figure.getShape();
                 figure.setShape(new Rectangle2D.Double(newX, newY, rect.getWidth(), rect.getHeight()));
@@ -174,6 +210,7 @@ public class Canvas extends JPanel implements MouseListener {
     }
 
     public void setParameters(ArrayList<Parameter> parameters){
+        figures.clear();
         for(Parameter parameter : parameters){
             switch (parameter.getType()) {
                 case Parameter.CIRCLE, Parameter.SQUARE:
@@ -197,8 +234,8 @@ public class Canvas extends JPanel implements MouseListener {
 
                 case Parameter.ANIMATE:
                     int animationType = 0;
-                    if(parameter.getId().equals("linea")) animationType = 1;
-                    else if(parameter.getId().equals("curva")) animationType = 2;
+                    if(parameter.getId().equals("line")) animationType = 1;
+                    else if(parameter.getId().equals("curve")) animationType = 2;
 
                     addMotion(animationType, parameter.getVal1().getValue(),
                             parameter.getVal2().getValue(), parameter.getVal3().getValue());
@@ -229,6 +266,93 @@ public class Canvas extends JPanel implements MouseListener {
             timer.start();
         }
     }
+
+    public void clearCanvas() {
+        figures.clear(); // Limpiar la lista de figuras
+        repaint(); // Volver a pintar el panel
+        setPreferredSize(new Dimension(900, 390));
+    }
+
+    // Metodo para exportar el panel a un PNG
+    public void exportToPNG() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar como PNG");
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("PNG Image", "png"));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        File fileToSave = fileChooser.getSelectedFile();
+
+        // Asegurarse de que el archivo tenga la extensión .png
+        if (!fileToSave.getName().toLowerCase().endsWith(".png")) {
+            fileToSave = new File(fileToSave.getAbsolutePath() + ".png");
+        }
+
+        // Crear una imagen del tamaño del panel
+        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = image.createGraphics();
+
+        // Pintar el panel sobre la imagen
+        paint(g2d);
+        g2d.dispose();
+
+        // Guardar la imagen como un archivo PNG
+        try {
+            ImageIO.write(image, "PNG", fileToSave);
+            JOptionPane.showMessageDialog(this, "Imagen guardada en: " + fileToSave.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al guardar la imagen.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void exportToPDF() {
+        // Crear un JFileChooser para permitir al usuario seleccionar el archivo
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar como PDF");
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("PDF Document", "pdf"));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection != JFileChooser.APPROVE_OPTION) {
+            return; // Salir si el usuario cancela
+        }
+
+        File fileToSave = fileChooser.getSelectedFile();
+
+        // Asegurarse de que el archivo tenga la extensión .pdf
+        if (!fileToSave.getName().toLowerCase().endsWith(".pdf")) {
+            fileToSave = new File(fileToSave.getAbsolutePath() + ".pdf");
+        }
+
+        // Crear una imagen del tamaño del panel
+        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = image.createGraphics();
+
+        // Pintar el panel sobre la imagen
+        paint(g2d);
+        g2d.dispose();
+
+        // Guardar la imagen como PDF
+        try {
+            // Crear el documento con un tamaño de página que coincide con el tamaño de la imagen
+            Document document = new Document(new com.itextpdf.text.Rectangle(getWidth(), getHeight()));
+            PdfWriter.getInstance(document, new FileOutputStream(fileToSave));
+            document.open();
+            Image pdfImage = Image.getInstance(image, null);
+            // Ajustar la imagen para que se ajuste a la página
+            pdfImage.scaleToFit(getWidth(), getHeight());
+            document.add(pdfImage);
+            document.close();
+            JOptionPane.showMessageDialog(this, "PDF guardado en: " + fileToSave.getAbsolutePath());
+        } catch (DocumentException | IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al guardar el PDF.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     @Override
     protected void paintComponent(Graphics g) {
