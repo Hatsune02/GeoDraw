@@ -36,7 +36,7 @@ public class DashBoard extends javax.swing.JFrame {
         styleMikuMenu(file);
         styleMikuMenu(canvasMenu);
         styleMikuMenu(reportsMenu);
-
+        canvas.clearCanvas();
     }
 
     private void styleMikuMenu(JMenu menu){
@@ -470,25 +470,11 @@ public class DashBoard extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void compileButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        /*canvas.addFigure(Parameter.CIRCLE, "circulo1", "azul", 20, 100, 30);
-        canvas.addMotion(2,100,200,2);
-        canvas.addFigure(Parameter.SQUARE, "cuadrado1", "rojo", 120, 800, 50);
-        canvas.addMotion(1,100,200,4);
-        canvas.addFigure(Parameter.RECTANGLE, "rectangulo1", "verde", 200, 100, 50, 80);
-        canvas.addFigure(Parameter.LINE, "linea2", "celeste", 340, 100, 380, 120);
-        canvas.addFigure(Parameter.POLYGON, "poligono", "cyan", 480, 100, 3, 100, 100);
-        canvas.addMotion(1,100,200,1);
-
-        canvas.revalidate();
-        //canvas.setPreferredSize(new Dimension(800, 1100));
-        canvas.repaint();
-
-        canvas.moveFigure(canvas.getFigures().get(0),4000);*/
-
         if(!textPane.getText().isEmpty()){
             lexer = new GeoLexer(new StringReader(textPane.getText()));
             parser = new GeoParser(lexer);
             try {
+                ErrorsLP.clearErrors();
                 parser.parse();
             } catch (Exception e) {
                 //JOptionPane.showMessageDialog(this,"Se detectaron errores al momento de compilar","Error",JOptionPane.ERROR_MESSAGE);
@@ -496,8 +482,8 @@ public class DashBoard extends javax.swing.JFrame {
 
             if(ErrorsLP.getErrors().isEmpty()){
                 JOptionPane.showMessageDialog(this,"La compilación ha sido exitosa","Listo!",JOptionPane.INFORMATION_MESSAGE);
-                parser.getParameters().forEach(param -> System.out.println(param.toString()));
-                canvas.setParameters(parser.getParameters());
+                //parser.getParameters().forEach(param -> System.out.println(param.toString()));
+                if(!parser.getParameters().isEmpty()) canvas.setParameters(parser.getParameters());
             }
             else{
                 JOptionPane.showMessageDialog(this,"Se detectaron errores al momento de compilar","Error",JOptionPane.ERROR_MESSAGE);
@@ -592,6 +578,7 @@ public class DashBoard extends javax.swing.JFrame {
             String[] columns = {"Operador", "Línea","Columna","Ocurrencia"};
             initReport(table,"Reporte de ocurrencias de operadores matemáticos",columns);
             countOperations(table);
+            table.addScroll();
         }
     }
     private void countOperations(ReportTable table) {
@@ -612,6 +599,7 @@ public class DashBoard extends javax.swing.JFrame {
             String[] columns = {"Color", "Cantidad de uso"};
             initReport(table, "Reporte de colores usados", columns);
             countForColors(table);
+            table.addScroll();
         }
     }
     private void countForColors(ReportTable table){
@@ -683,8 +671,8 @@ public class DashBoard extends javax.swing.JFrame {
             ReportTable table = new ReportTable();
             String[] columns = {"Objeto", "Cantidad de uso"};
             initReport(table, "Reporte de objetos usados", columns);
-
             countObjects(table);
+            table.addScroll();
         }
     }
     private void countObjects(ReportTable table){
@@ -724,8 +712,8 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     private void animationsReportIActionPerformed(java.awt.event.ActionEvent evt) {
-        if(parser.getOperations().isEmpty()){
-            JOptionPane.showMessageDialog(this,"No se encontro ninguna operacion.","No hay datos",JOptionPane.ERROR_MESSAGE);
+        if(parser.getParameters().isEmpty()){
+            JOptionPane.showMessageDialog(this,"No se encontro ninguna animación.","No hay datos",JOptionPane.ERROR_MESSAGE);
         }
         else if(!ErrorsLP.getErrors().isEmpty()){
             JOptionPane.showMessageDialog(this,"Existen errores en el texto, revise que este todo correcto","Error",JOptionPane.ERROR_MESSAGE);
@@ -734,8 +722,8 @@ public class DashBoard extends javax.swing.JFrame {
             ReportTable table = new ReportTable();
             String[] columns = {"Animación", "Cantidad de uso"};
             initReport(table, "Reporte de animaciones usados", columns);
-
             countAnimation(table);
+            table.addScroll();
         }
     }
     private void countAnimation(ReportTable table){
@@ -746,8 +734,8 @@ public class DashBoard extends javax.swing.JFrame {
             switch (p.getType()){
                 case Parameter.ANIMATE:
 
-                    if(p.getId().equals("linea"))countLine++;
-                    else if(p.getId().equals("curva")) countCurve++;
+                    if(p.getId().equals("line"))countLine++;
+                    else if(p.getId().equals("curve")) countCurve++;
 
                     break;
                 default:
@@ -760,7 +748,6 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     private void errorsReportIActionPerformed(java.awt.event.ActionEvent evt) {
-
         if(ErrorsLP.getErrors().isEmpty()){
             JOptionPane.showMessageDialog(this,"No hay ningun error :)","Error",JOptionPane.ERROR_MESSAGE);
         }
@@ -769,8 +756,8 @@ public class DashBoard extends javax.swing.JFrame {
             String[] columns = {"Lexema", "Línea", "Columna", "Tipo", "Descripción"};
             initReport(table, "Reporte de Errores", columns);
             addErrorsReport(table);
+            table.addScroll();
         }
-
     }
     private void addErrorsReport(ReportTable table){
         for(TError e: ErrorsLP.getErrors()){

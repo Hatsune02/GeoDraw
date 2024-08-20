@@ -97,12 +97,12 @@ public class Canvas extends JPanel implements MouseListener {
 
         boolean shouldResize = false;
 
-        if (x > currentSize.width || width > currentSize.height) {
+        if (x + width > currentSize.width || width > currentSize.height) {
             preferredSize.width = (int) x + (int) width + 20; // Ajusta el ancho preferido
             shouldResize = true;
         }
 
-        if (y > currentSize.height) {
+        if (y + height > currentSize.height) {
             preferredSize.height = (int) y + (int) height + 20; // Ajusta la altura preferida
             shouldResize = true;
         }
@@ -170,7 +170,6 @@ public class Canvas extends JPanel implements MouseListener {
                 newX = Math.pow(1 - t, 2) * x1 + 2 * (1 - t) * t * finalControlX + Math.pow(t, 2) * figure.getFinalX();
                 newY = Math.pow(1 - t, 2) * y1 + 2 * (1 - t) * t * finalControlY + Math.pow(t, 2) * figure.getFinalY();
             }
-            System.out.println("x: " + newX + " y: " + newY);
             if (figure.getShape() instanceof Rectangle2D) {
                 Rectangle2D rect = (Rectangle2D) figure.getShape();
                 figure.setShape(new Rectangle2D.Double(newX, newY, rect.getWidth(), rect.getHeight()));

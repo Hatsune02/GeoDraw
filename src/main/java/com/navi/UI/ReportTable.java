@@ -1,7 +1,9 @@
 package com.navi.UI;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class ReportTable extends JFrame{
@@ -47,5 +49,43 @@ public class ReportTable extends JFrame{
 
     public void addColumn(String column) {
         model.addColumn(column);
+    }
+
+    public void addScroll(){
+        for(int i = 0; i < table.getColumnCount(); i++){
+            table.getColumnModel().getColumn(i).setCellRenderer(new ScrollableCellRenderer());
+        }
+    }
+}
+
+class ScrollableCellRenderer extends JTextArea implements TableCellRenderer {
+
+    public ScrollableCellRenderer() {
+        setLineWrap(true);
+        setWrapStyleWord(true);
+        setOpaque(true);
+        setFont(new Font("Arial", Font.PLAIN, 18));
+        setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
+    }
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        setText(value.toString());
+
+        if (isSelected) {
+            setBackground(table.getSelectionBackground());
+            setForeground(table.getSelectionForeground());
+        } else {
+            setBackground(table.getBackground());
+            setForeground(table.getForeground());
+        }
+
+        setSize(table.getColumnModel().getColumn(column).getWidth(), getPreferredSize().height);
+
+        if (table.getRowHeight(row) != getPreferredSize().height) {
+            table.setRowHeight(row, getPreferredSize().height);
+        }
+
+        return this;
     }
 }

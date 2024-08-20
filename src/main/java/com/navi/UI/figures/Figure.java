@@ -70,7 +70,7 @@ public class Figure {
                 colorHex = "#86cecb";
                 break;
             case "cyan":
-                colorHex = "#0bdbb6";
+                colorHex = "#056d5b";
                 break;
             case "negro":
                 colorHex = "#000000";

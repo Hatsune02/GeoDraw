@@ -27,8 +27,7 @@ parser code
         System.out.println("\tLexeme: " + lexeme);
         System.out.println("\trow: " + line);
         System.out.println("\tcol: " + col);
-
-        addError(lexeme, line, col, "Se esperaba una instruccion para graficar");
+        addError(lexeme, line, col, "Error no recuperable");
     }
 
     //Metodo que se llama en el momento en que ya no es posible una recuperacion
@@ -40,8 +39,23 @@ parser code
         System.out.println("\tLexeme: " + lexeme);
         System.out.println("\trow: " + line);
         System.out.println("\tcol: " + col);
-        //TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
-        //Querys.errors.add(err);
+        HashMap<String, String> symbolNames = Validate.getSymbolNames();
+        List<Integer> tokens = expected_token_ids();
+        String des = "Se esperaba: ";
+        for(Integer i : tokens) {
+            String fromId = symbl_name_from_id(i);
+            String symbolName = symbolNames.get(fromId);
+            if(symbolName != null){
+                des += "'"+symbolName+ "' o ";
+            }
+            else{
+                if(!fromId.equals("error") && !fromId.equals("EOF")){
+                    des += fromId +" o ";
+                }
+            }
+        }
+        if(des.length() > 3) des = des.substring(0, des.length() - 3);
+        addError(lexeme, line, col, des);
     }
 
     public void countOperations(String lexeme, int line, int col, Expression e1, Expression e2) throws java.lang.Exception{
@@ -54,6 +68,9 @@ parser code
     }
     private void addError(String lexeme, int line, int col, String description){
         ErrorsLP.addError(lexeme, line, col, "Error Sintáctico", description);
+    }
+    protected int error_sync_size() {
+            return 1;
     }
 :}
 
@@ -102,6 +119,7 @@ instructions ::= instruction:i
             list.addAll(i);
             RESULT = list;
             :}
+
             ;
 
 instruction ::= graph:g
@@ -117,6 +135,8 @@ instruction ::= graph:g
             list.add(a);
             RESULT = list;
             :}
+            | error {:System.out.println("Error de todo");:}
+            | error animate {:System.out.println("Error grap");:}
             ;
 
 graph ::=     GRAFICAR CIRCLE LPAREN circle_square_param:p RPAREN
@@ -144,11 +164,12 @@ graph ::=     GRAFICAR CIRCLE LPAREN circle_square_param:p RPAREN
             p.setType(Parameter.POLYGON);
             RESULT = p;
             :}
-            | error:e LPAREN circle_square_param:p RPAREN
-            {:
-            addError(e.toString(), eleft, eright, "Se esperaba una instruccion para graficar");
-            System.out.println("ola");
-            :}
+            | GRAFICAR error RPAREN
+            | GRAFICAR CIRCLE LPAREN error RPAREN
+            | GRAFICAR SQUARE LPAREN error RPAREN
+            | GRAFICAR RECTANGLE LPAREN error RPAREN
+            | GRAFICAR LINE LPAREN error RPAREN
+            | GRAFICAR POLYGON LPAREN error RPAREN
             ;
 
 animate ::= ANIMAR OBJETO ANTERIOR LPAREN animate_param:p RPAREN
@@ -167,12 +188,14 @@ rectangle_line_param ::= ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA e
                     {:
                     RESULT = new RectangleLineParameter(Parameter.RECTANGLE, id, e1, e2, e3, e4, c);
                     :}
+
                     ;
 
 polygon_param ::=   ID:id COMMA expr:e1 COMMA expr:e2 COMMA expr:e3 COMMA expr:e4 COMMA expr:e5 COMMA color:c
                     {:
                     RESULT = new PolygonParameter(Parameter.POLYGON, id, e1, e2, e3, e4, e5, c);
                     :}
+
                     ;
 
 animate_param ::=     LINE COMMA expr:e1 COMMA expr:e2 COMMA expr:e3
@@ -183,6 +206,7 @@ animate_param ::=     LINE COMMA expr:e1 COMMA expr:e2 COMMA expr:e3
                     {:
                     RESULT = new Parameter(Parameter.ANIMATE, "curve", e1, e2, e3, "");
                     :}
+
                 ;
 
 color ::=    BLUE   {:RESULT = "azul"; :}
@@ -215,7 +239,10 @@ expr ::=  expr:e1 PLUS:s expr:e2
         {:
         countOperations("/", sleft, sright, e1, e2);
         if(e2.getValue()!=0) RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), e1.getValue() / e2.getValue());
-        else RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), 0);
+        else {
+            addError(e2.getStr(), sleft, sright, "No puedes divir entre 0");
+            RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), 0);
+        }
         :}
         | LPAREN expr:e RPAREN      {: RESULT = new Expression("( "+e.getStr()+" ) ", e.getValue()); :}
         | DIGIT:d                   {:

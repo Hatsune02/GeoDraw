@@ -35,17 +35,19 @@ public class GeoParser extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\041\000\002\002\004\000\002\002\003\000\002\003" +
+    "\000\051\000\002\002\004\000\002\002\003\000\002\003" +
     "\003\000\002\003\004\000\002\004\003\000\002\004\004" +
-    "\000\002\005\007\000\002\005\007\000\002\005\007\000" +
-    "\002\005\007\000\002\005\007\000\002\005\006\000\002" +
-    "\006\010\000\002\007\013\000\002\011\015\000\002\012" +
-    "\017\000\002\010\011\000\002\010\011\000\002\013\003" +
+    "\000\002\004\003\000\002\004\004\000\002\005\007\000" +
+    "\002\005\007\000\002\005\007\000\002\005\007\000\002" +
+    "\005\007\000\002\005\005\000\002\005\007\000\002\005" +
+    "\007\000\002\005\007\000\002\005\007\000\002\005\007" +
+    "\000\002\006\010\000\002\007\013\000\002\011\015\000" +
+    "\002\012\017\000\002\010\011\000\002\010\011\000\002" +
+    "\013\003\000\002\013\003\000\002\013\003\000\002\013" +
+    "\003\000\002\013\003\000\002\013\003\000\002\013\003" +
     "\000\002\013\003\000\002\013\003\000\002\013\003\000" +
-    "\002\013\003\000\002\013\003\000\002\013\003\000\002" +
-    "\013\003\000\002\013\003\000\002\014\005\000\002\014" +
-    "\005\000\002\014\005\000\002\014\005\000\002\014\005" +
-    "\000\002\014\003" });
+    "\002\014\005\000\002\014\005\000\002\014\005\000\002" +
+    "\014\005\000\002\014\005\000\002\014\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -53,85 +55,95 @@ public class GeoParser extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\153\000\006\003\007\005\006\001\002\000\010\002" +
-    "\000\003\007\005\006\001\002\000\010\002\uffff\003\uffff" +
-    "\005\uffff\001\002\000\014\011\104\013\103\014\105\015" +
-    "\101\016\102\001\002\000\004\023\054\001\002\000\004" +
-    "\002\053\001\002\000\012\002\ufffd\003\ufffd\005\ufffd\006" +
-    "\012\001\002\000\004\007\014\001\002\000\010\002\ufffc" +
-    "\003\ufffc\005\ufffc\001\002\000\004\010\015\001\002\000" +
-    "\004\023\016\001\002\000\006\011\017\012\021\001\002" +
-    "\000\004\004\045\001\002\000\004\024\044\001\002\000" +
-    "\004\004\022\001\002\000\006\023\023\037\025\001\002" +
-    "\000\006\023\023\037\025\001\002\000\014\004\026\017" +
-    "\027\020\031\021\032\022\030\001\002\000\016\004\uffe1" +
-    "\017\uffe1\020\uffe1\021\uffe1\022\uffe1\024\uffe1\001\002\000" +
-    "\006\023\023\037\025\001\002\000\006\023\023\037\025" +
+    "\000\166\000\006\003\007\005\006\001\002\000\010\002" +
+    "\uffff\003\uffff\005\uffff\001\002\000\010\002\000\003\007" +
+    "\005\006\001\002\000\016\003\057\011\062\013\060\014" +
+    "\061\015\055\016\056\001\002\000\012\002\ufffb\003\ufffb" +
+    "\005\ufffb\006\012\001\002\000\004\002\053\001\002\000" +
+    "\012\002\ufffd\003\ufffd\005\ufffd\006\012\001\002\000\004" +
+    "\007\014\001\002\000\010\002\ufffc\003\ufffc\005\ufffc\001" +
+    "\002\000\004\010\015\001\002\000\004\023\016\001\002" +
+    "\000\006\011\017\012\021\001\002\000\004\004\045\001" +
+    "\002\000\004\024\044\001\002\000\004\004\022\001\002" +
+    "\000\006\023\023\037\025\001\002\000\006\023\023\037" +
+    "\025\001\002\000\014\004\026\017\027\020\030\021\032" +
+    "\022\031\001\002\000\016\004\uffd9\017\uffd9\020\uffd9\021" +
+    "\uffd9\022\uffd9\024\uffd9\001\002\000\006\023\023\037\025" +
     "\001\002\000\006\023\023\037\025\001\002\000\006\023" +
     "\023\037\025\001\002\000\006\023\023\037\025\001\002" +
-    "\000\016\004\uffe4\017\uffe4\020\uffe4\021\uffe4\022\uffe4\024" +
-    "\uffe4\001\002\000\016\004\uffe5\017\uffe5\020\uffe5\021\032" +
-    "\022\030\024\uffe5\001\002\000\016\004\uffe3\017\uffe3\020" +
-    "\uffe3\021\uffe3\022\uffe3\024\uffe3\001\002\000\016\004\uffe6" +
-    "\017\uffe6\020\uffe6\021\032\022\030\024\uffe6\001\002\000" +
-    "\014\004\040\017\027\020\031\021\032\022\030\001\002" +
-    "\000\006\023\023\037\025\001\002\000\014\017\027\020" +
-    "\031\021\032\022\030\024\ufff0\001\002\000\014\017\027" +
-    "\020\031\021\032\022\030\024\043\001\002\000\016\004" +
-    "\uffe2\017\uffe2\020\uffe2\021\uffe2\022\uffe2\024\uffe2\001\002" +
-    "\000\010\002\ufff5\003\ufff5\005\ufff5\001\002\000\006\023" +
-    "\023\037\025\001\002\000\014\004\047\017\027\020\031" +
-    "\021\032\022\030\001\002\000\006\023\023\037\025\001" +
-    "\002\000\014\004\051\017\027\020\031\021\032\022\030" +
-    "\001\002\000\006\023\023\037\025\001\002\000\014\017" +
-    "\027\020\031\021\032\022\030\024\ufff1\001\002\000\004" +
-    "\002\001\001\002\000\004\036\055\001\002\000\004\004" +
-    "\060\001\002\000\004\024\057\001\002\000\012\002\ufff6" +
-    "\003\ufff6\005\ufff6\006\ufff6\001\002\000\006\023\023\037" +
-    "\025\001\002\000\014\004\062\017\027\020\031\021\032" +
-    "\022\030\001\002\000\006\023\023\037\025\001\002\000" +
-    "\014\004\064\017\027\020\031\021\032\022\030\001\002" +
-    "\000\006\023\023\037\025\001\002\000\014\004\066\017" +
-    "\027\020\031\021\032\022\030\001\002\000\024\025\073" +
-    "\026\077\027\075\030\067\031\070\032\076\033\100\034" +
-    "\072\035\074\001\002\000\004\024\uffec\001\002\000\004" +
-    "\024\uffeb\001\002\000\004\024\ufff4\001\002\000\004\024" +
-    "\uffe8\001\002\000\004\024\uffef\001\002\000\004\024\uffe7" +
-    "\001\002\000\004\024\uffed\001\002\000\004\024\uffea\001" +
-    "\002\000\004\024\uffee\001\002\000\004\024\uffe9\001\002" +
-    "\000\004\023\152\001\002\000\004\023\132\001\002\000" +
-    "\004\023\127\001\002\000\004\023\111\001\002\000\004" +
-    "\023\106\001\002\000\004\036\055\001\002\000\004\024" +
-    "\110\001\002\000\012\002\ufffa\003\ufffa\005\ufffa\006\ufffa" +
-    "\001\002\000\004\036\112\001\002\000\004\004\115\001" +
-    "\002\000\004\024\114\001\002\000\012\002\ufff8\003\ufff8" +
-    "\005\ufff8\006\ufff8\001\002\000\006\023\023\037\025\001" +
-    "\002\000\014\004\117\017\027\020\031\021\032\022\030" +
+    "\000\006\023\023\037\025\001\002\000\016\004\uffdc\017" +
+    "\uffdc\020\uffdc\021\uffdc\022\uffdc\024\uffdc\001\002\000\016" +
+    "\004\uffdb\017\uffdb\020\uffdb\021\uffdb\022\uffdb\024\uffdb\001" +
+    "\002\000\016\004\uffdd\017\uffdd\020\uffdd\021\032\022\031" +
+    "\024\uffdd\001\002\000\016\004\uffde\017\uffde\020\uffde\021" +
+    "\032\022\031\024\uffde\001\002\000\014\004\040\017\027" +
+    "\020\030\021\032\022\031\001\002\000\006\023\023\037" +
+    "\025\001\002\000\014\017\027\020\030\021\032\022\031" +
+    "\024\uffe9\001\002\000\014\017\027\020\030\021\032\022" +
+    "\031\024\043\001\002\000\016\004\uffda\017\uffda\020\uffda" +
+    "\021\uffda\022\uffda\024\uffda\001\002\000\010\002\uffee\003" +
+    "\uffee\005\uffee\001\002\000\006\023\023\037\025\001\002" +
+    "\000\014\004\047\017\027\020\030\021\032\022\031\001" +
+    "\002\000\006\023\023\037\025\001\002\000\014\004\051" +
+    "\017\027\020\030\021\032\022\031\001\002\000\006\023" +
+    "\023\037\025\001\002\000\014\017\027\020\030\021\032" +
+    "\022\031\024\uffea\001\002\000\004\002\001\001\002\000" +
+    "\010\002\ufffa\003\ufffa\005\ufffa\001\002\000\004\023\163" +
+    "\001\002\000\004\023\141\001\002\000\004\024\140\001" +
+    "\002\000\004\023\133\001\002\000\004\023\115\001\002" +
+    "\000\004\023\063\001\002\000\006\003\066\036\064\001" +
+    "\002\000\004\004\071\001\002\000\004\024\070\001\002" +
+    "\000\004\024\067\001\002\000\012\002\ufff0\003\ufff0\005" +
+    "\ufff0\006\ufff0\001\002\000\012\002\ufff6\003\ufff6\005\ufff6" +
+    "\006\ufff6\001\002\000\006\023\023\037\025\001\002\000" +
+    "\014\004\073\017\027\020\030\021\032\022\031\001\002" +
+    "\000\006\023\023\037\025\001\002\000\014\004\075\017" +
+    "\027\020\030\021\032\022\031\001\002\000\006\023\023" +
+    "\037\025\001\002\000\014\004\077\017\027\020\030\021" +
+    "\032\022\031\001\002\000\006\023\023\037\025\001\002" +
+    "\000\014\004\101\017\027\020\030\021\032\022\031\001" +
+    "\002\000\026\003\106\025\107\026\112\027\110\030\102" +
+    "\031\103\032\113\033\114\034\105\035\111\001\002\000" +
+    "\004\024\uffe5\001\002\000\004\024\uffe4\001\002\000\004" +
+    "\024\uffec\001\002\000\004\024\uffe1\001\002\000\004\024" +
+    "\uffdf\001\002\000\004\024\uffe8\001\002\000\004\024\uffe6" +
+    "\001\002\000\004\024\uffe0\001\002\000\004\024\uffe7\001" +
+    "\002\000\004\024\uffe3\001\002\000\004\024\uffe2\001\002" +
+    "\000\006\003\117\036\116\001\002\000\004\004\123\001" +
+    "\002\000\004\024\122\001\002\000\004\024\121\001\002" +
+    "\000\012\002\ufff8\003\ufff8\005\ufff8\006\ufff8\001\002\000" +
+    "\012\002\ufff2\003\ufff2\005\ufff2\006\ufff2\001\002\000\006" +
+    "\023\023\037\025\001\002\000\014\004\125\017\027\020" +
+    "\030\021\032\022\031\001\002\000\006\023\023\037\025" +
+    "\001\002\000\014\004\127\017\027\020\030\021\032\022" +
+    "\031\001\002\000\006\023\023\037\025\001\002\000\014" +
+    "\004\131\017\027\020\030\021\032\022\031\001\002\000" +
+    "\026\003\106\025\107\026\112\027\110\030\102\031\103" +
+    "\032\113\033\114\034\105\035\111\001\002\000\004\024" +
+    "\uffed\001\002\000\006\003\134\036\116\001\002\000\004" +
+    "\024\137\001\002\000\004\024\136\001\002\000\012\002" +
+    "\ufff9\003\ufff9\005\ufff9\006\ufff9\001\002\000\012\002\ufff3" +
+    "\003\ufff3\005\ufff3\006\ufff3\001\002\000\012\002\ufff4\003" +
+    "\ufff4\005\ufff4\006\ufff4\001\002\000\006\003\144\036\142" +
+    "\001\002\000\004\004\147\001\002\000\004\024\146\001" +
+    "\002\000\004\024\145\001\002\000\012\002\uffef\003\uffef" +
+    "\005\uffef\006\uffef\001\002\000\012\002\ufff5\003\ufff5\005" +
+    "\ufff5\006\ufff5\001\002\000\006\023\023\037\025\001\002" +
+    "\000\014\004\151\017\027\020\030\021\032\022\031\001" +
+    "\002\000\006\023\023\037\025\001\002\000\014\004\153" +
+    "\017\027\020\030\021\032\022\031\001\002\000\006\023" +
+    "\023\037\025\001\002\000\014\004\155\017\027\020\030" +
+    "\021\032\022\031\001\002\000\006\023\023\037\025\001" +
+    "\002\000\014\004\157\017\027\020\030\021\032\022\031" +
     "\001\002\000\006\023\023\037\025\001\002\000\014\004" +
-    "\121\017\027\020\031\021\032\022\030\001\002\000\006" +
-    "\023\023\037\025\001\002\000\014\004\123\017\027\020" +
-    "\031\021\032\022\030\001\002\000\006\023\023\037\025" +
-    "\001\002\000\014\004\125\017\027\020\031\021\032\022" +
-    "\030\001\002\000\024\025\073\026\077\027\075\030\067" +
-    "\031\070\032\076\033\100\034\072\035\074\001\002\000" +
-    "\004\024\ufff3\001\002\000\004\036\055\001\002\000\004" +
-    "\024\131\001\002\000\012\002\ufffb\003\ufffb\005\ufffb\006" +
-    "\ufffb\001\002\000\004\036\133\001\002\000\004\004\136" +
-    "\001\002\000\004\024\135\001\002\000\012\002\ufff7\003" +
-    "\ufff7\005\ufff7\006\ufff7\001\002\000\006\023\023\037\025" +
-    "\001\002\000\014\004\140\017\027\020\031\021\032\022" +
-    "\030\001\002\000\006\023\023\037\025\001\002\000\014" +
-    "\004\142\017\027\020\031\021\032\022\030\001\002\000" +
-    "\006\023\023\037\025\001\002\000\014\004\144\017\027" +
-    "\020\031\021\032\022\030\001\002\000\006\023\023\037" +
-    "\025\001\002\000\014\004\146\017\027\020\031\021\032" +
-    "\022\030\001\002\000\006\023\023\037\025\001\002\000" +
-    "\014\004\150\017\027\020\031\021\032\022\030\001\002" +
-    "\000\024\025\073\026\077\027\075\030\067\031\070\032" +
-    "\076\033\100\034\072\035\074\001\002\000\004\024\ufff2" +
-    "\001\002\000\004\036\112\001\002\000\004\024\154\001" +
-    "\002\000\012\002\ufff9\003\ufff9\005\ufff9\006\ufff9\001\002" +
-    "\000\010\002\ufffe\003\ufffe\005\ufffe\001\002" });
+    "\161\017\027\020\030\021\032\022\031\001\002\000\026" +
+    "\003\106\025\107\026\112\027\110\030\102\031\103\032" +
+    "\113\033\114\034\105\035\111\001\002\000\004\024\uffeb" +
+    "\001\002\000\006\003\165\036\064\001\002\000\004\024" +
+    "\167\001\002\000\004\024\166\001\002\000\012\002\ufff1" +
+    "\003\ufff1\005\ufff1\006\ufff1\001\002\000\012\002\ufff7\003" +
+    "\ufff7\005\ufff7\006\ufff7\001\002\000\010\002\ufffe\003\ufffe" +
+    "\005\ufffe\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -139,46 +151,49 @@ public class GeoParser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\153\000\012\002\007\003\003\004\004\005\010\001" +
-    "\001\000\006\004\154\005\010\001\001\000\002\001\001" +
+    "\000\166\000\012\002\007\003\004\004\003\005\010\001" +
+    "\001\000\002\001\001\000\006\004\167\005\010\001\001" +
+    "\000\002\001\001\000\004\006\053\001\001\000\002\001" +
+    "\001\000\004\006\012\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\010" +
+    "\017\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\001\001\000\004\014\023\001\001\000\004\014\041\001" +
+    "\001\000\002\001\001\000\002\001\001\000\004\014\036" +
+    "\001\001\000\004\014\035\001\001\000\004\014\034\001" +
+    "\001\000\004\014\033\001\001\000\004\014\032\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\006\012\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\004\010\017\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\014\023\001\001\000\004\014\041\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\014\036\001\001" +
-    "\000\004\014\035\001\001\000\004\014\034\001\001\000" +
-    "\004\014\033\001\001\000\004\014\032\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\014\040\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\014\045\001\001\000\002\001\001\000\004" +
-    "\014\047\001\001\000\002\001\001\000\004\014\051\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\007\055" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\014\060\001\001\000\002\001\001\000\004" +
-    "\014\062\001\001\000\002\001\001\000\004\014\064\001" +
-    "\001\000\002\001\001\000\004\013\070\001\001\000\002" +
+    "\002\001\001\000\002\001\001\000\004\014\040\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\004\014\045\001\001\000\002\001\001" +
+    "\000\004\014\047\001\001\000\002\001\001\000\004\014" +
+    "\051\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\011\064\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\014\071\001\001\000\002\001\001\000\004\014" +
+    "\073\001\001\000\002\001\001\000\004\014\075\001\001" +
+    "\000\002\001\001\000\004\014\077\001\001\000\002\001" +
+    "\001\000\004\013\103\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\007\106\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\011\112\001\001" +
+    "\004\007\117\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\004\014\115\001\001\000\002\001\001\000\004\014\117" +
-    "\001\001\000\002\001\001\000\004\014\121\001\001\000" +
-    "\002\001\001\000\004\014\123\001\001\000\002\001\001" +
-    "\000\004\013\125\001\001\000\002\001\001\000\004\007" +
-    "\127\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\012\133\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\004\014\136\001\001\000\002\001\001" +
-    "\000\004\014\140\001\001\000\002\001\001\000\004\014" +
-    "\142\001\001\000\002\001\001\000\004\014\144\001\001" +
-    "\000\002\001\001\000\004\014\146\001\001\000\002\001" +
-    "\001\000\004\013\150\001\001\000\002\001\001\000\004" +
-    "\011\152\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001" });
+    "\004\014\123\001\001\000\002\001\001\000\004\014\125" +
+    "\001\001\000\002\001\001\000\004\014\127\001\001\000" +
+    "\002\001\001\000\004\013\131\001\001\000\002\001\001" +
+    "\000\004\007\134\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\012\142\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\014\147\001\001\000\002\001\001\000\004\014" +
+    "\151\001\001\000\002\001\001\000\004\014\153\001\001" +
+    "\000\002\001\001\000\004\014\155\001\001\000\002\001" +
+    "\001\000\004\014\157\001\001\000\002\001\001\000\004" +
+    "\013\161\001\001\000\002\001\001\000\004\011\163\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -237,9 +252,23 @@ public class GeoParser extends java_cup.runtime.lr_parser {
         System.out.println("\tLexeme: " + lexeme);
         System.out.println("\trow: " + line);
         System.out.println("\tcol: " + col);
-
-        addError(lexeme, line, col, "Se esperaba una instruccion para graficar");
-
+        HashMap<String, String> symbolNames = Validate.getSymbolNames();
+        List<Integer> tokens = expected_token_ids();
+        String des = "Se esperaba: ";
+        for(Integer i : tokens) {
+            String fromId = symbl_name_from_id(i);
+            String symbolName = symbolNames.get(fromId);
+            if(symbolName != null){
+                des += "'"+symbolName+ "' o ";
+            }
+            else{
+                if(!fromId.equals("error") && !fromId.equals("EOF")){
+                    des += fromId +" o ";
+                }
+            }
+        }
+        if(des.length() > 3) des = des.substring(0, des.length() - 3);
+        addError(lexeme, line, col, des);
     }
 
     //Metodo que se llama en el momento en que ya no es posible una recuperacion
@@ -251,8 +280,21 @@ public class GeoParser extends java_cup.runtime.lr_parser {
         System.out.println("\tLexeme: " + lexeme);
         System.out.println("\trow: " + line);
         System.out.println("\tcol: " + col);
-        //TError err = new TError(lexeme,"Error Sintáctico", "Token no esperado", line, col);
-        //Querys.errors.add(err);
+        HashMap<String, String> symbolNames = Validate.getSymbolNames();
+        List<Integer> tokens = expected_token_ids();
+        String des = "Se esperaba: ";
+        for(Integer i : tokens) {
+            String fromId = symbl_name_from_id(i);
+            String symbolName = symbolNames.get(fromId);
+            if(symbolName != null){
+                des += "'"+symbolName+ "' o ";
+            }
+            else{
+                des += fromId +" o ";
+            }
+        }
+        des = des.substring(0, des.length() - 3);
+        addError(lexeme, line, col, des);
     }
 
     public void countOperations(String lexeme, int line, int col, Expression e1, Expression e2) throws java.lang.Exception{
@@ -265,6 +307,9 @@ public class GeoParser extends java_cup.runtime.lr_parser {
     }
     private void addError(String lexeme, int line, int col, String description){
         ErrorsLP.addError(lexeme, line, col, "Error Sintáctico", description);
+    }
+    protected int error_sync_size() {
+            return 1;
     }
 
 
@@ -389,7 +434,25 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // graph ::= GRAFICAR CIRCLE LPAREN circle_square_param RPAREN 
+          case 6: // instruction ::= error 
+            {
+              ArrayList<Parameter> RESULT =null;
+		System.out.println("Error de todo");
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instruction",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+            }
+          return CUP$GeoParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 7: // instruction ::= error animate 
+            {
+              ArrayList<Parameter> RESULT =null;
+		System.out.println("Error grap");
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("instruction",2, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+            }
+          return CUP$GeoParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 8: // graph ::= GRAFICAR CIRCLE LPAREN circle_square_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -404,7 +467,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // graph ::= GRAFICAR SQUARE LPAREN circle_square_param RPAREN 
+          case 9: // graph ::= GRAFICAR SQUARE LPAREN circle_square_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -419,7 +482,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // graph ::= GRAFICAR RECTANGLE LPAREN rectangle_line_param RPAREN 
+          case 10: // graph ::= GRAFICAR RECTANGLE LPAREN rectangle_line_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -434,7 +497,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 9: // graph ::= GRAFICAR LINE LPAREN rectangle_line_param RPAREN 
+          case 11: // graph ::= GRAFICAR LINE LPAREN rectangle_line_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -449,7 +512,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // graph ::= GRAFICAR POLYGON LPAREN polygon_param RPAREN 
+          case 12: // graph ::= GRAFICAR POLYGON LPAREN polygon_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -464,25 +527,61 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // graph ::= error LPAREN circle_square_param RPAREN 
+          case 13: // graph ::= GRAFICAR error RPAREN 
             {
               Parameter RESULT =null;
-		int eleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)).left;
-		int eright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)).right;
-		Object e = (Object)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)).value;
-		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
-		int pright = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).right;
-		Parameter p = (Parameter)((java_cup.runtime.Symbol) CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).value;
-		
-            addError(e.toString(), eleft, eright, "Se esperaba una instruccion para graficar");
-            System.out.println("ola");
-            
-              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-3)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // animate ::= ANIMAR OBJETO ANTERIOR LPAREN animate_param RPAREN 
+          case 14: // graph ::= GRAFICAR CIRCLE LPAREN error RPAREN 
+            {
+              Parameter RESULT =null;
+
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+            }
+          return CUP$GeoParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 15: // graph ::= GRAFICAR SQUARE LPAREN error RPAREN 
+            {
+              Parameter RESULT =null;
+
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+            }
+          return CUP$GeoParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 16: // graph ::= GRAFICAR RECTANGLE LPAREN error RPAREN 
+            {
+              Parameter RESULT =null;
+
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+            }
+          return CUP$GeoParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 17: // graph ::= GRAFICAR LINE LPAREN error RPAREN 
+            {
+              Parameter RESULT =null;
+
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+            }
+          return CUP$GeoParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 18: // graph ::= GRAFICAR POLYGON LPAREN error RPAREN 
+            {
+              Parameter RESULT =null;
+
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("graph",3, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+            }
+          return CUP$GeoParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 19: // animate ::= ANIMAR OBJETO ANTERIOR LPAREN animate_param RPAREN 
             {
               Parameter RESULT =null;
 		int pleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -496,7 +595,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // circle_square_param ::= ID COMMA expr COMMA expr COMMA expr COMMA color 
+          case 20: // circle_square_param ::= ID COMMA expr COMMA expr COMMA expr COMMA color 
             {
               Parameter RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-8)).left;
@@ -522,7 +621,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // rectangle_line_param ::= ID COMMA expr COMMA expr COMMA expr COMMA expr COMMA color 
+          case 21: // rectangle_line_param ::= ID COMMA expr COMMA expr COMMA expr COMMA expr COMMA color 
             {
               RectangleLineParameter RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-10)).left;
@@ -551,7 +650,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // polygon_param ::= ID COMMA expr COMMA expr COMMA expr COMMA expr COMMA expr COMMA color 
+          case 22: // polygon_param ::= ID COMMA expr COMMA expr COMMA expr COMMA expr COMMA expr COMMA color 
             {
               PolygonParameter RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-12)).left;
@@ -583,7 +682,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // animate_param ::= LINE COMMA expr COMMA expr COMMA expr 
+          case 23: // animate_param ::= LINE COMMA expr COMMA expr COMMA expr 
             {
               Parameter RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).left;
@@ -603,7 +702,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // animate_param ::= CURVE COMMA expr COMMA expr COMMA expr 
+          case 24: // animate_param ::= CURVE COMMA expr COMMA expr COMMA expr 
             {
               Parameter RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-4)).left;
@@ -623,7 +722,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // color ::= BLUE 
+          case 25: // color ::= BLUE 
             {
               String RESULT =null;
 		RESULT = "azul"; 
@@ -632,7 +731,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // color ::= RED 
+          case 26: // color ::= RED 
             {
               String RESULT =null;
 		RESULT = "rojo"; 
@@ -641,7 +740,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // color ::= YELLOW 
+          case 27: // color ::= YELLOW 
             {
               String RESULT =null;
 		RESULT = "amarillo"; 
@@ -650,7 +749,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // color ::= GREEN 
+          case 28: // color ::= GREEN 
             {
               String RESULT =null;
 		RESULT = "verde"; 
@@ -659,7 +758,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // color ::= SKY 
+          case 29: // color ::= SKY 
             {
               String RESULT =null;
 		RESULT = "celeste"; 
@@ -668,7 +767,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // color ::= CYAN 
+          case 30: // color ::= CYAN 
             {
               String RESULT =null;
 		RESULT = "cyan"; 
@@ -677,7 +776,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // color ::= BLACK 
+          case 31: // color ::= BLACK 
             {
               String RESULT =null;
 		RESULT = "negro"; 
@@ -686,7 +785,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // color ::= PINK 
+          case 32: // color ::= PINK 
             {
               String RESULT =null;
 		RESULT = "rosado"; 
@@ -695,7 +794,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // color ::= PURPLE 
+          case 33: // color ::= PURPLE 
             {
               String RESULT =null;
 		RESULT = "morado"; 
@@ -704,7 +803,16 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // expr ::= expr PLUS expr 
+          case 34: // color ::= error 
+            {
+              String RESULT =null;
+		System.out.println("Color malo");
+              CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("color",9, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
+            }
+          return CUP$GeoParser$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 35: // expr ::= expr PLUS expr 
             {
               Expression RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
@@ -725,7 +833,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // expr ::= expr MINUS expr 
+          case 36: // expr ::= expr MINUS expr 
             {
               Expression RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
@@ -746,7 +854,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // expr ::= expr TIMES expr 
+          case 37: // expr ::= expr TIMES expr 
             {
               Expression RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
@@ -767,7 +875,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 30: // expr ::= expr DIVISION expr 
+          case 38: // expr ::= expr DIVISION expr 
             {
               Expression RESULT =null;
 		int e1left = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)).left;
@@ -782,14 +890,17 @@ class CUP$GeoParser$actions {
 		
         countOperations("/", sleft, sright, e1, e2);
         if(e2.getValue()!=0) RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), e1.getValue() / e2.getValue());
-        else RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), 0);
+        else {
+            addError(e2.getStr(), sleft, sright, "No puedes divir entre 0");
+            RESULT = new Expression(e1.getStr() +" / "+ e2.getStr(), 0);
+        }
         
               CUP$GeoParser$result = parser.getSymbolFactory().newSymbol("expr",10, ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-2)), ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()), RESULT);
             }
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 31: // expr ::= LPAREN expr RPAREN 
+          case 39: // expr ::= LPAREN expr RPAREN 
             {
               Expression RESULT =null;
 		int eleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.elementAt(CUP$GeoParser$top-1)).left;
@@ -801,7 +912,7 @@ class CUP$GeoParser$actions {
           return CUP$GeoParser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 32: // expr ::= DIGIT 
+          case 40: // expr ::= DIGIT 
             {
               Expression RESULT =null;
 		int dleft = ((java_cup.runtime.Symbol)CUP$GeoParser$stack.peek()).left;
