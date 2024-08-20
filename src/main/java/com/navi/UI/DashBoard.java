@@ -556,6 +556,9 @@ public class DashBoard extends javax.swing.JFrame {
 
         if (option == JFileChooser.APPROVE_OPTION) {
             currentFile = fileChooser.getSelectedFile();
+            if (!currentFile.getName().toLowerCase().endsWith(".txt")) {
+                currentFile = new File(currentFile.getAbsolutePath() + ".txt");
+            }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(currentFile))) {
                 writer.write(""); // Escribe un archivo vacío
                 textPane.setText(""); // Limpia el JTextPane
@@ -793,16 +796,6 @@ public class DashBoard extends javax.swing.JFrame {
 
     private void lightThemeActionPerformed(java.awt.event.ActionEvent evt) {
         canvas.setBackground(new Color(196, 199, 211));
-    }
-
-    public static void main(String args[]) {
-        FlatMaterialDarkerIJTheme.setup();
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DashBoard().setVisible(true);
-            }
-        });
     }
 
     private GeoLexer lexer;

@@ -67,7 +67,6 @@ Comma = [,]
         return new Symbol(type, yyline+1, yycolumn+1, value);
     }
     private void error(){
-        System.out.println("Error en linea: "+(yyline+1)+", columna: "+(yycolumn+1));
         ErrorsLP.addError(yytext(), yyline+1, yycolumn+1, "Error Léxico","Cadena no definida");
     }
 %}

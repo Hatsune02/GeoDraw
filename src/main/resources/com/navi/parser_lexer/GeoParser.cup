@@ -245,6 +245,7 @@ expr ::=  expr:e1 PLUS:s expr:e2
         }
         :}
         | LPAREN expr:e RPAREN      {: RESULT = new Expression("( "+e.getStr()+" ) ", e.getValue()); :}
+        | MINUS expr:e {:RESULT = new Expression("-"+e.getStr(),-e.getValue());:}
         | DIGIT:d                   {:
         DecimalFormat df = new DecimalFormat("0.#");
 

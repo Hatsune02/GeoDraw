@@ -34,7 +34,8 @@ public class Validate {
             SYMBOLNAMES.put("BLACK", "color");
             SYMBOLNAMES.put("PINK", "color");
             SYMBOLNAMES.put("PURPLE", "color");
-
+            SYMBOLNAMES.put("ID", "Un nombre válido");
+            SYMBOLNAMES.put("DIGIT", "Un número");
         }
         return SYMBOLNAMES;
     }
